@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.luannews467506" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.chinaluan.news" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>luan_news</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
-  <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+        潞安新闻中心客户端APP.
+  </description>
+  <author email="baiwen1979@qq.com" href="http://github.com/baiwen1979">
+      白文江
     </author>
   <content src="index.html"/>
   <access origin="*"/>
