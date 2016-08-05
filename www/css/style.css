@@ -1,1 +1,132 @@
-/* Empty. Add your own CSS if you like */
+#news-list img:first-child {
+    min-width: 100px;
+    height: auto;
+}
+
+#news-list a {
+    padding-left: 120px;
+}
+
+.news-header {
+    border-bottom: 1px solid red;
+    margin-bottom: 10px;
+}
+
+.news-header h1 {
+    font-size: 1.4em;
+    text-align: center;
+    color: red;
+}
+
+.news-header p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.news-header p span {
+    margin-right: 5px;
+}
+
+#btn-say {
+    padding-left: 10px;
+    margin-left: 5px;
+    border-radius: 20px;
+    width: 60%;
+    color: #888;
+    text-align: left;
+}
+
+#btn-say:before {
+    padding-right: 10px;
+}
+
+#btn-say:hover {
+    color: #444;
+}
+
+#btn-favor {
+    margin-left: 10px;
+}
+
+#btn-share {
+    margin-left: 10px;
+    position: static;
+}
+
+#slides .box {
+    width: 100%;
+}
+
+#slides img {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+}
+
+#slides .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0, 0.5);
+    margin-bottom: 0;
+    padding: 5px;
+    color: #FFF;
+}
+
+#slides .slider-pager {
+    text-align: right;
+    bottom: 10px;
+    z-index: 10;
+    right: 5px;
+}
+
+#slides .slider-pager .slider-pager-page {
+    transform: scale(0.5, 0.5);
+    color: #FFF;
+    margin: 0;
+    width: 13px;
+}
+
+#tab-news .bar {
+    height: 32px;
+    padding: 0;
+}
+
+#tab-news .has-header {
+    top: 32px;
+}
+
+#tab-news .row {
+    padding: 0;
+}
+
+.slide-tab {
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+}
+
+.slide-tab li {
+    float: left;
+    line-height: 32px;
+    overflow: hidden;
+    padding: 0 5px;
+    font-size: 16px;
+}
+
+.slide-tab a {
+    border-bottom: 1px solid #fff;
+    color: #888;
+    font-weight: 500;
+    display: block;
+    padding: 0 8px;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.current a{
+    color: #f00;
+    border-bottom: 2px solid #F00;
+}

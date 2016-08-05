@@ -1,50 +1,40 @@
-angular.module('starter.services', [])
+angular.module('app.services', ['ngResource'])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+.factory('News', ['$resource', function($resource) {
 
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+    var resConfig = {
+        categoryUrl: 'json/news/categories',
+        listUrl: 'json/news/news_list',
+        detailUrl: 'json/news/news_detail'
+    };
 
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    var loadResource = function(url, onOK, onErr) {
+        if (typeof(onErr) != 'function') {
+            onErr = function(err){
+                console.log(err);
+            };
         }
-      }
-      return null;
-    }
+        $resource(url).get(function(res) {
+            if (res.result == 'OK') {
+                onOK(res.data);
+            }
+            else {
+                onErr(res.data);
+            }
+        }, onErr);
+    };
+    
+    return {
+        getPage: function(pageIndex, onOK, onErr) {           
+            loadResource(resConfig.listUrl + pageIndex + '.json', onOK, onErr);
+        },
+
+        get: function(newsId, onOK, onErr) {
+            loadResource(resConfig.detailUrl + newsId + '.json', onOK, onErr);
+        },
+
+        getCategories: function(onOK, onErr) {
+            loadResource(resConfig.categoryUrl + '.json', onOK, onErr);
+        }
   };
-});
+}]);

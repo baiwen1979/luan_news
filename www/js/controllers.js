@@ -1,28 +1,98 @@
-angular.module('starter.controllers', [])
+angular.module('app.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('ServiceCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+.controller('NewsCtrl', function($scope, $ionicLoading, $ionicSlideBoxDelegate, News) {
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+    var pageCount = 0;
+    var newsList = [];
+
+    $scope.hasMore = true;
+    $scope.slides = [];
+    $scope.newsList = [];
+    $scope.categories = [];
+
+    $scope.$on('$ionicView.enter', function(e) {
+        //$scope.doRefresh();
+    });
+
+    function isSlide(news) {
+        return news.large_image;
+    }
+
+    function notSlide(news) {
+        return !news.large_image;
+    }
+
+    function loadCategories() {
+        News.getCategories(function(categories){
+            $scope.categories = categories;
+        });
+    }
+
+    $scope.doRefresh = function() {
+        pageCount = 0;
+        $scope.hasMore = true;
+        News.getPage(pageCount++, function(newsList) {            
+            $scope.slides = newsList.filter(isSlide);
+            $scope.newsList = newsList.filter(notSlide);
+            $ionicSlideBoxDelegate.update();
+            $scope.$broadcast('scroll.refreshComplete');
+        }, function(err) {
+            $scope.hasMore = false;
+        });     
+    };
+
+    $scope.loadMore = function() {
+        News.getPage(pageCount, function(newsList) {
+            if (pageCount == 0) {
+                $scope.slides = newsList.filter(isSlide);
+                $scope.newsList = $scope.newsList.concat(newsList.filter(notSlide));
+            }
+            else {
+                $scope.newsList = $scope.newsList.concat(newsList);
+            }
+            $ionicSlideBoxDelegate.update();
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            pageCount ++;
+        }, function(err) {
+            $scope.hasMore = false;
+        });
+    };
+
+    loadCategories();
+    $ionicSlideBoxDelegate.enableSlide(true);
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('NewsDetailCtrl', function($scope, $stateParams, $ionicHistory, $ionicActionSheet, News) {
+    News.get($stateParams.newsId, function(newsDetail){
+        $scope.newsDetail = newsDetail;
+    });
+
+    $scope.goBack = function() {
+        $ionicHistory.goBack();
+    };
+
+    $scope.addToFavorite = function() {
+
+    };
+
+    $scope.showShareActionSheet = function() {
+        var sheet = $ionicActionSheet.show({
+            buttons:[{
+                text: 'share1'
+            },{
+                text: 'share2'
+            }],
+            cancel: function() {
+                sheet.hide();
+            }
+        });
+    };
 })
 
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+    $scope.settings = {
+      enableFriends: true
+    };
 });
