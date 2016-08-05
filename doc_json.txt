@@ -1,0 +1,242 @@
+潞安新闻中心客户端（前端）与内容服务网站（后端）基于JSON的数据接口规范
+假设新闻内容服务网站的网址为：http://news.chinaluan.com/api
+一、客户端请求文章分类（栏目）数据：
+    1. 请求：http://news.chinaluan.com/api/categories.do
+    2. 参数：无
+    3. 响应(JSON): 
+       {
+         'result': 'OK',
+         'data': [
+           {'id': 1, 'name': 'news',  'label': '新闻', 'desc': '新闻类', 'indexUrl': 'news.do?offset=0&count=3'},
+           {'id': 2, 'name': 'paper', 'label': '报纸', 'desc': '报纸类', 'indexUrl': 'paper.do?layout_id=1&pub_date=20160728'},
+           {'id': 3, 'name': 'video', 'label': '视频', 'desc': '视频类', 'indexUrl': 'video.do?offset=0&count=3'},
+           {'id': 4, 'name': 'audio', 'label': '音频', 'desc': '音频类', 'indexUrl': 'audio.do?offset=0&count=3'},
+           {'id': 5, 'name': 'image', 'label': '图片', 'desc': '图片类', 'indexUrl': 'image.do?offset=0&count=2'}
+         ]
+       }
+    4. 部分属性说明:
+       result: 响应结果，若后台出现异常，将result的值设置为'ERR'
+       data: 响应数据，若后台出现异常，在将异常信息保存在此属性中
+       indexUrl: 点击文章分类（栏目）链接所对应的URL
+二、文章列表
+   （一）客户端请求新闻类文章列表数据：
+    1. 请求：http://news.chinaluan.com/api/news_artiles.do?offset=0&count=3
+    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(文章数量)
+    3. 响应(JSON):
+       {
+         'result': 'OK',
+         'data': [
+           {'id': 1, 'title': '文章标题1', 'category': 'news', 'abstract': '文章摘要1', 'publishTime': 1469710751, 
+            'author': '宋小林', 'source': '潞安新闻中心', 'commentsCount': 20, 'large_image': null, 
+            'hot': 1, 'thumbnail': 'http://news.chinaluan.com/thumbnails/thumbnail001.jpg'},
+           {'id': 2, 'title': '文章标题2', 'category': 'news', 'abstract': '文章摘要2', 'publishTime': 1469710781, 
+            'author': '宋小林', 'source': '潞安新闻中心', 'commentsCount': 10, 'large_image': null, 
+            'hot': 2, 'thumbnail': 'http://news.chinaluan.com/thumbnails/thumbnail002.jpg'},
+           {'id': 3, 'title': '文章标题3', 'category': 'news', 'abstract': '文章摘要3', 'publishTime': 1469710881, 
+            'author': '宋小林', 'source': '潞安新闻中心', 'commentsCount': 5, 'large_image': 'http://news.chinaluan.com/images/imgnews03.jpg',  
+            'hot': 3, 'thumbnail': null}
+         ]
+       }
+    4. 部分属性说明:
+       publishTime: 文章的发布时间(戳）
+       source: 文章来源
+       commentsCount: 评论数
+       thumbnail: 文章缩略图（URL)，显示在文章标题的左面（或右面）,不能为空，所有新闻类文章都有缩略图
+       large_image: 大图的(URL)。若值为null,则显示其缩略图，否则显示大图，大图占用整个页面（屏幕）的宽度，文章标题显示在下面
+       hot: 文章热度
+        
+   （二）客户端请求报纸版面文章列表数据：
+    1. 请求：http://news.chinaluan.com/api/paper_articles.do?layout_id=1&pub_date=20160728
+    2. 参数：layout_id(版面id), pub_date(发行日期)
+    3. 响应(JSON):
+       {
+         'result': 'OK',
+         'data': {
+            'layoutImageUrl': 'http://news.chinaluan.com/layouts/20160728-01.jpg',
+            'layoutTitle': '要闻',
+            'ArticleList': [
+              {'id': 1, 'title': '我省发布上半年主要经济数据', 'category':'paper', 
+               'layoutPosition': {'left': 256, 'top':114, 'width':103, 'height':168}},
+              {'id': 2, 'title': '我省召开2016年度军地协调会', 'category':'paper',
+               'layoutPosition': {'left': 256, 'top':331, 'width':117, 'height':116}},
+              {'id': 3, 'title': '省十二届人大常委会第二十七次会议闭幕', 'category':'paper', 
+               'layoutPosition': {'left': 72, 'top':456, 'width':175, 'height':69}},
+              {'id': 4, 'title': '省人大常委会召开第60次主任会议', 'category':'paper', 
+               'layoutPosition': {'left': 72, 'top':534, 'width':173, 'height':38}},
+              {'id': 5, 'title': '出租车改革方案出台：网约车领到“身份证”', 'category':'paper',
+               'layoutPosition': {'left': 260, 'top':440, 'width':114, 'height':130}},
+              {'id': 6, 'title': '关帝诞辰1856周年祭祀活动在运城举行', 'category':'paper',
+               'layoutPosition': {'left': 8, 'top':337, 'width':43, 'height':11}}
+            ]
+         }
+       }
+    4. 部分属性说明：
+       layoutImageUrl: 报纸版面的底图URL
+       layoutTitle: 版面标题
+       ArticleList: 版面所包含的文章列表，其中layoutPosition用来表示文章在版面中的位置和区域，从而实现点击版面的相应版块而打开相应文章的功能。
+                    [注]报纸类文章的发布需要后台有一个可视化界面，以便于发布者通过拖放和移动操作在报纸版面的底图上面指定文章所对应的报纸版块。
+
+   （三）客户端请求视频文章列表数据：
+    1. 请求：http://news.chinaluan.com/api/video_articles.do?offset=0&count=3
+    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(加载数量)
+    3. 响应(JSON)
+       {
+         'result': 'OK',
+         'data': [
+           {'id': 1, 'title': '地质灾害发生时如何避险', 'category': 'video', 'publishTime': 1469710886, 'commentsCount': 2,
+            'thumbnail': 'http://news.chianluan.com/thumbnails/thumbnail-v001.jpg', 'srcUrl': null, 'duration': 0},
+           {'id': 2, 'title': '记者直击：太原暴雨现场', 'category': 'video', 'publishTime': 1469710786, 'commentsCount': 5,
+            'thumbnail': 'http://news.chianluan.com/thumbnails/thumbnail-v002.jpg', 'srcUrl': 'http://news.chinaluan.com/video/v01.mp4', 'duration':85},
+           {'id': 3, 'title': '暴雨来袭，如何自救与逃生', 'category': 'video', 'publishTime': 1469710686, 'commentsCount': 1,
+            'thumbnail': 'http://news.chianluan.com/thumbnails/thumbnail-v003.jpg', 'srcUrl': null, 'duration': 0}
+         ]
+       }
+    4. 部分属性说明：
+       srcUrl: 视频源的URL，若值为null,说明视频不会在列表中播放，需要用户点击进入视频内容页方可播放，否则，视频首帧画面的缩略图以整个页面的宽度显示，点击直接播放。
+       duration：视频时长（秒数）
+
+   （四）客户端请求音频文章列表数据：
+    1. 请求：http://news.chinaluan.com/api/audio_articles.do?offset=0&count=3
+    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(加载数量)
+    3. 响应(JSON)
+       {
+         'result': 'OK',
+         'data': [
+           {'id': 1, 'title': '去年客运航班正常率68.33%，平均延误21分钟', 'category': 'audio', 'publishTime': 1469710568, 'commentsCount': 2,
+            'srcUrl': 'http://news.chinaluan.com/audio/a01.mp3', 'duration': 96}
+           {'id': 2, 'title': '工信部：仍有1亿电话用户未实名', 'category': 'audio', 'publishTime': 1469710568, 'commentsCount': 2,
+            'srcUrl': null , 'duration': 0}
+           {'id': 3, 'title': '山西今年新增政府债务限额264亿元', 'category': 'audio', 'publishTime': 1469710568, 'commentsCount': 2,
+            'srcUrl': null , 'duration': 0}        
+         ]
+       }
+    4. 部分属性说明：
+       srcUrl：音频源的URL，若值为空，说明音频不会在列表中直接点击播放，需要用户点击进入内容页进行播放。否则，在文章标题右面显示播放图标，点击直接播放。
+
+   （五）客户端请求图片类文章列表数据：
+    1. 请求：http://news.chinaluan.com/api/image_articles.do?offset=0&count=2
+    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(加载数量)
+    3. 响应(JSON)
+       {
+         'result': 'OK',
+         'data': [
+           {'id': 1, 'title': '大众创业 万众创新--泥土的深情', 'category': 'image', 
+            'firstImage': 'http://news.chinaluan.com/images/img01.jpg',
+            'imageCount': 2
+           },
+           {'id': 2, 'title': '中伏至 太原又“蒸”又“烤”', 'category': 'image',
+            'firstImage': 'http://news.chinaluan.com/images/img03.jpg',
+            'imageCount': 3
+           }
+         ]
+       }
+    4. 部分属性说明：
+       firstImage: 第一张图片的URL
+       imageCount: 文章中所包含的图片数量
+
+三、文章内容
+   （一）客户端请求新闻类文章内容数据
+    1. 请求: http://news.chinaluan.com/api/news_article.do?id=1
+    2. 参数: id
+    3. 响应(JSON)
+       {
+         'result': 'OK',
+         'data': {
+           'id': 1, 'title': '文章标题', 'abstract': '文章摘要', 'content': '文章内容',
+           'source': '文章来源', 'author': '作者', 'publishTime': 1469710751,
+           'comments': [
+             {'user': '张三', 'portrait_url': 'http://news.chinaluan.com/portraits/user1.jpg','comment':'评论内容', 'commentTime': 1469710888},
+             {'user': '李四', 'portrait_url': 'http://news.chinaluan.com/portraits/user2.jpg','comment':'评论内容', 'commentTime': 1469710888}
+           ]
+         }
+       }
+    4. 部分属性说明：
+       comments: 评论列表，其中portrait_url为评论者的头像缩略图
+
+   （二）客户端请求报纸版面文章内容数据
+    1. 请求：http://news.chinaluan.com/api/paper_article.do?id=1
+    2. 参数：id
+    3. 响应(JSON)
+        {
+          'result': 'OK',
+          'data': {
+            'id': 1, 
+            'title': '我省发布上半年主要经济数据', 
+            'abstract': '文章摘要', 
+            'content': '文章内容',
+            'source': '文章来源', 
+            'author': '作者', 
+            'publishTime': 1469710798,
+            'comments': [
+              {'user': '张三', 'portrait_url': 'http://news.chinaluan.com/portraits/user1.jpg','comment':'评论内容', 'commentTime': 1469710888},
+              {'user': '李四', 'portrait_url': 'http://news.chinaluan.com/portraits/user2.jpg','comment':'评论内容', 'commentTime': 1469710999}
+           ]
+          }
+        }
+
+   （三）客户端请求视频类文章内容数据
+    1. 请求：http://news.chinaluan.com/api/video_article.do?id=1
+    2. 参数：id
+    3. 响应(JSON) 
+       {
+         'result': 'OK',
+         'data': {
+            'id': 1, 
+            'title': '地质灾害发生时如何避险', 
+            'abstract': '文章摘要', 
+            'content': '嵌入了视频的文章内容',
+            'source': '文章来源', 
+            'author': '作者',
+            'publishTime': 1469710798,
+            'comments': [
+              {'user': '张三', 'portrait_url': 'http://news.chinaluan.com/portraits/user1.jpg','comment':'评论内容', 'commentTime': 1469710666},
+              {'user': '李四', 'portrait_url': 'http://news.chinaluan.com/portraits/user2.jpg','comment':'评论内容', 'commentTime': 1469710777}
+           ]
+         }
+       }
+   （四）客户端请求音频类文章内容数据
+    1. 请求：http://news.chinaluan.com/api/audio_article.do?id=2
+    2. 参数：id
+    3. 响应(JSON) 
+       {
+         'result': 'OK',
+         'data': {
+            'id': 2, 
+            'title': '工信部：仍有1亿电话用户未实名', 
+            'abstract': '文章摘要', 
+            'content': '文章文本内容',
+            'source': '文章来源', 
+            'author': '作者', 
+            'publishTime': 1469710798, 
+            'srcUrl': 'http://news.chinaluan.com/audio/a01.mp3', 
+            'duration': 245,
+            'comments': [
+              {'user': '张三', 'portrait_url': 'http://news.chinaluan.com/portraits/user1.jpg','comment':'评论内容', 'commentTime': 1469710444},
+              {'user': '李四', 'portrait_url': 'http://news.chinaluan.com/portraits/user2.jpg','comment':'评论内容', 'commentTime': 1469710555}
+           ]
+         }
+       }
+
+   （五）客户端请求图片类文章内容数据
+    1. 请求：http://news.chinaluan.com/api/image_article.do?id=2
+    2. 参数：id
+    3. 响应(JSON) 
+       {
+         'result': 'OK',
+         'data': {
+            'id': 2, 
+            'title': '中伏至 太原又“蒸”又“烤”', 
+            'images':  [
+              {'imageUrl': 'http://news.chinaluan.com/images/img03.jpg', 'desc': '<p>7月27日，进入一年中最热的中伏...</p>'},
+              {'imageUrl': 'http://news.chinaluan.com/images/img04.jpg', 'desc': ''},
+              {'imageUrl': 'http://news.chinaluan.com/images/img05.jpg', 'desc': ''}
+            ]
+            'comments': [
+              {'user': '张三', 'portrait_url': 'http://news.chinaluan.com/portraits/user1.jpg','comment':'评论内容', 'commentTime': 1469710222},
+              {'user': '李四', 'portrait_url': 'http://news.chinaluan.com/portraits/user2.jpg','comment':'评论内容', 'commentTime': 1469710333}
+            ]
+         }
+       }
+    4. 部分属性说明：
+       images: 文章包含的图片列表，显示为幻灯片，每一张图片都可以包含其描述信息。切换图片时，若该图片的描述信息不为空，则显示之，否则只显示第一张图片的描述信息
+

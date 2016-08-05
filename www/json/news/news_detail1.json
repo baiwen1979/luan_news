@@ -1,0 +1,23 @@
+{
+    "result": "OK",
+    "data": {
+        "id": 1,
+        "title": "文章标题文章标题文章标题文章标题文章标题文章标题",
+        "abstract": "文章摘要",
+        "content": "<p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p><p>文章内容</p>",
+        "source": "潞安新闻中心",
+        "author": "作者",
+        "publishTime": 1469710751,
+        "comments": [{
+            "user": "张三",
+            "portrait_url": "http://news.chinaluan.com/portraits/user1.jpg",
+            "comment": "评论内容",
+            "commentTime": 1469710888
+        }, {
+            "user": "李四",
+            "portrait_url": "http://news.chinaluan.com/portraits/user2.jpg",
+            "comment": "评论内容",
+            "commentTime": 1469710888
+        }]
+    }
+}
