@@ -53,35 +53,35 @@
     position: static;
 }
 
-#slides .box {
+#inner-slider .box {
     width: 100%;
 }
 
-#slides img {
+#inner-slider img {
     display: block;
     width: 100%;
     max-height: 100%;
 }
 
-#slides .title {
+#inner-slider .title {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0,0,0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     margin-bottom: 0;
     padding: 5px;
     color: #FFF;
 }
 
-#slides .slider-pager {
+#inner-slider .slider-pager {
     text-align: right;
     bottom: 10px;
     z-index: 10;
     right: 5px;
 }
 
-#slides .slider-pager .slider-pager-page {
+#inner-slider .slider-pager .slider-pager-page {
     transform: scale(0.5, 0.5);
     color: #FFF;
     margin: 0;
@@ -93,30 +93,43 @@
     padding: 0;
 }
 
+#tab-news .bar-header {
+    border-bottom: none;
+}
+
 #tab-news .has-header {
-    top: 32px;
+    top: 0px;
 }
 
 #tab-news .row {
     padding: 0;
 }
 
-.slide-tab {
-    overflow: hidden;
+#tab-news .tabs-container {
+    overflow-x: hidden;
+}
+
+#tab-news .tabs-container + button{
+    font-size: 10px;
+    width: 40px;
+}
+
+.slide-tabs {
     margin: 0;
-    width: 100%;
+    width: auto;
+    white-space: nowrap;
 }
 
-.slide-tab li {
-    float: left;
-    line-height: 32px;
-    overflow: hidden;
-    padding: 0 5px;
+.slide-tabs li {
+    padding: 0 3px;
     font-size: 16px;
+    display: inline-block;
 }
 
-.slide-tab a {
-    border-bottom: 1px solid #fff;
+.slide-tabs a {
+    border-top:3px solid transparent;
+    line-height: 28px;
+    border-bottom: 2px solid transparent;
     color: #888;
     font-weight: 500;
     display: block;
@@ -126,7 +139,16 @@
     -moz-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
-.current a{
+
+.slide-tabs li.current a {
     color: #f00;
-    border-bottom: 2px solid #F00;
+    border-bottom-color: #F00;
+}
+
+#outer-slider {
+    position: absolute;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

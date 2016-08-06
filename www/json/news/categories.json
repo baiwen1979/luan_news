@@ -25,5 +25,15 @@
         "name": "image",
         "label": "图片",
         "desc": "图片类"
+    },{
+        "id": 6,
+        "name": "social",
+        "label": "社会",
+        "desc": "社会类"
+    }, {
+        "id": 7,
+        "name": "changzhi",
+        "label": "长治",
+        "desc": "长治"
     }]
 }

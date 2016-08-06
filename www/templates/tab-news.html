@@ -1,21 +1,23 @@
 <ion-view id="tab-news" view-title="潞安新闻中心">
   <ion-header-bar class="bar-light sub-header">
     <div class="row header-row">
-      <ul class="slide-tab">
-        <li ng-class="slideIndex == 0 ? 'current':''" ng-repeat="category in categories">
-          <a href="#" ng-click="activeSlide(0)">{{category.label}}</a>
-        </li>
-      </ul>
+      <ion-scroll delegate-handle="tabs-scroll" zooming="false" class="tabs-container" direction="x" scrollbar-y="false" scrollbar-x="false">
+        <ul class="slide-tabs">
+          <li ng-class="slideIndex == $index ? 'current':''" ng-repeat="category in categories">
+            <a href="#" ng-click="activeSlide($index)">{{category.label}}</a>
+          </li>
+        </ul>
+      </ion-scroll>
+      <button class="button button-clear button-stable icon ion-ios-plus-empty" ng-click="addCategory()">
+      </button>
     </div>
   </ion-header-bar>
-  <ion-content>
-    <ion-slide-box show-pager="false" on-slide-changed="slideChanged(index)" active-slide="slideIndex">
-      <ion-slide>
-        <ion-refresher
-          pulling-text="下拉刷新..."
-          on-refresh="doRefresh()">
+  <ion-slide-box delegate-handle="outer-slider" id="outer-slider" show-pager="false" on-slide-changed="outerSlideChanged(index)" active-slide="slideIndex">
+    <ion-slide>
+      <ion-content>
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-slide-box id="slides" does-continue="true"  auto-play="false" pager-click="onPagerClick" on-slide-changed="slideHasChanged($index)">
+        <ion-slide-box delegate-handle="inner-slider" id="inner-slider" ng-mouseenter="enableOuterSlider(false)" ng-mouseleave="enableOuterSlider(true)" does-continue="true" auto-play="false">
           <ion-slide ng-repeat="slide in slides">
             <div class="box blue">
               <a ng-href="#/tab/news/{{slide.id}}"><img ng-src="{{slide.large_image}}"></a>
@@ -30,13 +32,14 @@
             <p>{{news.category}}</p>
           </ion-item>
         </ion-list>
-        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="5%">
+        <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%">
         </ion-infinite-scroll>
-      </ion-slide>
-      <ion-slide>
+      </ion-content>
+    </ion-slide>
+    <ion-slide>
+      <ion-content>
         <h2>2</h2>
-      </ion-slide>
-    </ion-slide-box>
-  </ion-content>
+      </ion-content>
+    </ion-slide>
+  </ion-slide-box>
 </ion-view>
-
