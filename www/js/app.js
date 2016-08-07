@@ -9,39 +9,38 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
             cordova.plugins.Keyboard.disableScroll(true);
         }
         if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
         }
     });
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $stateProvider
-
     // setup an abstract state for the tabs directive
-    .state('tab', {
+        .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
     })
 
     // Each tab has its own nav history stack:
-    .state('tab.news', {
-        url: '/news',
+    .state('tab.home', {
+        url: '/home',
         views: {
-            'tab-news': {
-                templateUrl: 'templates/tab-news.html',
-                controller: 'NewsCtrl'
+            'tab-home': {
+                templateUrl: 'templates/tab-home.html',
+                controller: 'HomeCtrl'
             }
         }
     })
 
-    .state('tab.news-detail', {
-        url: '/news/:newsId',
+    .state('tab.detail', {
+        url: '/home/:id',
         views: {
-            'tab-news': {
-                templateUrl: 'templates/news-detail.html',
-                controller: 'NewsDetailCtrl'
+            'tab-home': {
+                templateUrl: 'templates/detail.html',
+                controller: 'DetailCtrl'
             }
         }
     })
@@ -67,7 +66,19 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/news');
+    $urlRouterProvider.otherwise('/tab/home');
 
     $ionicConfigProvider.platform.android.tabs.position('bottom');
+})
+
+.config(function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from our assets domain.  Notice the difference between * and **.
+        'http://www.chinaluan.com/**'
+    ]);
+
+    // The blacklist overrides the whitelist so the open redirect here is blocked.
+    $sceDelegateProvider.resourceUrlBlacklist([]);
 });

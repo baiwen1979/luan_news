@@ -4,23 +4,66 @@
     1. 请求：http://news.chinaluan.com/api/categories.do
     2. 参数：无
     3. 响应(JSON): 
-       {
-         'result': 'OK',
-         'data': [
-           {'id': 1, 'name': 'news',  'label': '新闻', 'desc': '新闻类', 'indexUrl': 'news.do?offset=0&count=3'},
-           {'id': 2, 'name': 'paper', 'label': '报纸', 'desc': '报纸类', 'indexUrl': 'paper.do?layout_id=1&pub_date=20160728'},
-           {'id': 3, 'name': 'video', 'label': '视频', 'desc': '视频类', 'indexUrl': 'video.do?offset=0&count=3'},
-           {'id': 4, 'name': 'audio', 'label': '音频', 'desc': '音频类', 'indexUrl': 'audio.do?offset=0&count=3'},
-           {'id': 5, 'name': 'image', 'label': '图片', 'desc': '图片类', 'indexUrl': 'image.do?offset=0&count=2'}
-         ]
-       }
+    {
+        "result": "OK",
+        "data": [{
+            "id": 1,
+            "name": "news",
+            "label": "新闻",
+            "desc": "新闻栏目",
+            "Class": "news",
+            "apiUrl": "data/news"
+        }, {
+            "id": 2,
+            "name": "paper",
+            "label": "报纸",
+            "desc": "报纸栏目",
+            "Class": "paper",
+            "apiUrl": "data/paper"
+        }, {
+            "id": 3,
+            "name": "video",
+            "label": "视频",
+            "desc": "视频栏目",
+            "Class": "video",
+            "apiUrl": "data/video"
+        }, {
+            "id": 4,
+            "name": "audio",
+            "label": "音频",
+            "desc": "音频栏目",
+            "Class": "audio",
+            "apiUrl": "data/audio"
+        }, {
+            "id": 5,
+            "name": "image",
+            "label": "图片",
+            "desc": "图片栏目",
+            "Class": "image",
+            "apiUrl": "data/image"
+        },{
+            "id": 6,
+            "name": "social",
+            "label": "社会",
+            "desc": "社会栏目",
+            "Class": "news",
+            "apiUrl": "data/social"
+        }, {
+            "id": 7,
+            "name": "changzhi",
+            "label": "长治",
+            "desc": "长治",
+            "Class": "news",
+            "apiUrl": "data/social"
+        }]
+    }
     4. 部分属性说明:
        result: 响应结果，若后台出现异常，将result的值设置为'ERR'
        data: 响应数据，若后台出现异常，在将异常信息保存在此属性中
-       indexUrl: 点击文章分类（栏目）链接所对应的URL
+       Class: 
 二、文章列表
    （一）客户端请求新闻类文章列表数据：
-    1. 请求：http://news.chinaluan.com/api/news_artiles.do?offset=0&count=3
+    1. 请求：http://news.chinaluan.com/api/news.do?page=
     2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(文章数量)
     3. 响应(JSON):
        {

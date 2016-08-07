@@ -1,32 +1,12 @@
 angular.module('app.controllers', [])
 
-.controller('ServiceCtrl', function($scope) {})
-
-.controller('NewsCtrl', function($scope, $timeout, $ionicLoading,
-    $ionicScrollDelegate,
-    $ionicSlideBoxDelegate,
-    $ionicScrollDelegate,
-    News) {
-
-    var pageCount = 0;
-    var newsList = [];
-
-    $scope.hasMore = true;
-    $scope.slides = [];
-    $scope.newsList = [];
-    $scope.categories = [];
+.controller('HomeCtrl', function($scope, $timeout, $ionicScrollDelegate, $ionicSlideBoxDelegate,
+    Model) {
+    
     $scope.slideIndex = 0;
 
-    function isSlide(news) {
-        return news.large_image;
-    }
-
-    function notSlide(news) {
-        return !news.large_image;
-    }
-
     function loadCategories() {
-        News.getCategories(function(categories) {
+        Model.list('category',{}, function(categories) {
             $scope.categories = categories;
         });
     }
@@ -37,14 +17,6 @@ angular.module('app.controllers', [])
         }, 500);
     });
 
-    $scope.$on('$stateChangeSuccess', function() {
-        $scope.loadMore();
-    });
-
-    $scope.enableOuterSlider = function(enable) {
-        $ionicSlideBoxDelegate.$getByHandle('outer-slider').enableSlide(enable);
-    };
-
     $scope.activeSlide = function(index) {
         $ionicSlideBoxDelegate.$getByHandle('outer-slider').slide(index);
     };
@@ -53,14 +25,50 @@ angular.module('app.controllers', [])
         $ionicScrollDelegate.$getByHandle('tabs-scroll').scrollTo(index * 40);
     };
 
+    loadCategories();
+    $ionicSlideBoxDelegate.enableSlide(true);
+})
+
+.controller('NewsCtrl', function($scope, $ionicLoading, $ionicScrollDelegate, $ionicSlideBoxDelegate, Model){
+
+    var pageCount = 0;
+    $scope.hasMore = true;
+
+    function beSlide(artile) {
+        return artile.large_image;
+    }
+
+    function notSlide(artile) {
+        return !artile.large_image;
+    }
+
+    $scope.$on('$stateChangeSuccess', function() {
+        //$scope.loadMore();
+    });
+
+    $scope.down = function() {
+        console.log("down");
+        $scope.enableOuterSlider(false);
+    };
+    $scope.up = function(){
+        console.log("up");
+        $scope.enableOuterSlider(true);
+    };
+
+    $scope.enableOuterSlider = function(enable) {
+        console.log("enable outer Slider: " + enable);
+        $ionicSlideBoxDelegate.$getByHandle('outer-slider').enableSlide(enable);
+    };
+
     $scope.doRefresh = function() {
-        pageCount = 0;
+        $scope.pageCount = 0;
         $scope.hasMore = true;
-        News.getPage(pageCount++, function(newsList) {
-            $scope.slides = newsList.filter(isSlide);
-            $scope.newsList = newsList.filter(notSlide);
-            $ionicSlideBoxDelegate.update();
+        var param = {c: 1, p: 0};
+        Model.list("article", param, function(newsList) {
+            $scope.slides = newsList.filter(beSlide);
+            $scope.list = newsList.filter(notSlide);
             $ionicScrollDelegate.resize();
+            $ionicSlideBoxDelegate.update();
             $scope.$broadcast('scroll.refreshComplete');
         }, function(err) {
             $scope.hasMore = false;
@@ -68,12 +76,14 @@ angular.module('app.controllers', [])
     };
 
     $scope.loadMore = function() {
-        News.getPage(pageCount, function(newsList) {
+        var param = {c: 1, p: pageCount };
+        Model.list("article", param, function(newsList) {
             if (pageCount === 0) {
-                $scope.slides = newsList.filter(isSlide);
-                $scope.newsList = $scope.newsList.concat(newsList.filter(notSlide));
-            } else {
-                $scope.newsList = $scope.newsList.concat(newsList);
+                $scope.slides = newsList.filter(beSlide);
+                $scope.list = newsList.filter(notSlide);
+            }
+            else {
+                $scope.list = $scope.list.concat(newsList);
             }
             $ionicScrollDelegate.resize();
             $ionicSlideBoxDelegate.update();
@@ -83,14 +93,11 @@ angular.module('app.controllers', [])
             $scope.hasMore = false;
         });
     };
-
-    loadCategories();
-    $ionicSlideBoxDelegate.enableSlide(true);
 })
 
-.controller('NewsDetailCtrl', function($scope, $stateParams, $ionicHistory, $ionicActionSheet, News) {
-    News.get($stateParams.newsId, function(newsDetail) {
-        $scope.newsDetail = newsDetail;
+.controller('DetailCtrl', function($scope, $stateParams, $ionicHistory, $ionicActionSheet, Model) {
+    Model.detail('article', $stateParams.id, function(detail) {
+        $scope.detail = detail;
     });
 
     $scope.goBack = function() {
@@ -107,13 +114,12 @@ angular.module('app.controllers', [])
                 text: 'share1'
             }, {
                 text: 'share2'
-            }],
-            cancel: function() {
-                sheet.hide();
-            }
+            }]
         });
     };
 })
+
+.controller('ServiceCtrl', function($scope) {})
 
 .controller('AccountCtrl', function($scope) {
     $scope.settings = {
