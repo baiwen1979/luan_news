@@ -46,17 +46,7 @@ angular.module('app.controllers', [])
         //$scope.loadMore();
     });
 
-    $scope.down = function() {
-        console.log("down");
-        $scope.enableOuterSlider(false);
-    };
-    $scope.up = function(){
-        console.log("up");
-        $scope.enableOuterSlider(true);
-    };
-
     $scope.enableOuterSlider = function(enable) {
-        console.log("enable outer Slider: " + enable);
         $ionicSlideBoxDelegate.$getByHandle('outer-slider').enableSlide(enable);
     };
 
@@ -93,6 +83,28 @@ angular.module('app.controllers', [])
             $scope.hasMore = false;
         });
     };
+    $ionicSlideBoxDelegate.enableSlide(true);
+})
+
+.controller('PaperCtrl', function($scope, $ionicScrollDelegate, $ionicSlideBoxDelegate, Model) {
+    var pageCount = 0;
+    $scope.hasMore = true;
+    $scope.pages = [];
+    var pages = [];
+
+    $scope.loadMore = function() {
+        var param = {c: 2, p: pageCount };
+        Model.list("article", param, function(page) {
+            pages.push(page);
+            $scope.pages = pages;
+            $ionicScrollDelegate.resize();
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+            pageCount++;
+        }, function(err) {
+            $scope.hasMore = false;
+        });
+    };
+    //$scope.loadMore();
 })
 
 .controller('DetailCtrl', function($scope, $stateParams, $ionicHistory, $ionicActionSheet, Model) {

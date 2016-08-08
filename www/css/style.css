@@ -25,6 +25,7 @@
 .news-header p {
     font-size: 0.9em;
     color: #666;
+    margin-bottom: 2px;
 }
 
 .news-header p span {
@@ -160,4 +161,26 @@
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#paper-list.paper .page {
+    padding: 0;
+    position: relative;
+    width:378px;
+    height: 597px;
+}
+
+#paper-list.paper .page img {
+    min-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#paper-list.paper .page a {
+    position: absolute; 
+    display: block;
+}
+
+#paper-list.paper .page a:hover {
+    background-color: rgba(0,0,0,0.5);
 }

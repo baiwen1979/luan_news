@@ -1,7 +1,7 @@
-<ion-content id="news-list" class="articles" ng-controller="NewsCtrl">
+<ion-content id="news-list" class="news" ng-controller="NewsCtrl">
   <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
   </ion-refresher>
-  <ion-slide-box ng-mouseenter="enableOuterSlider(false)" ng-mouseleave="enableOuterSlider(true)" ng-mousedown="down()" ng-mouseup="up()" delegate-handle="inner-slider" id="inner-slider" does-continue="true" auto-play="false">
+  <ion-slide-box ng-mouseenter="enableOuterSlider(false)" on-touch="enableOuterSlider(false)" on-release="enableOuterSlider(true)" delegate-handle="inner-slider" id="inner-slider" does-continue="true" auto-play="false">
     <ion-slide ng-repeat="slide in slides">
       <div class="box blue">
         <a ng-href="#/tab/home/{{slide.id}}"><img ng-src="{{slide.large_image}}"></a>
@@ -9,7 +9,6 @@
       </div>
     </ion-slide>
   </ion-slide-box>
-
   <ion-list>
     <ion-item class="item item-thumbnail-left" ng-repeat="news in list" type="item-text-wrap" href="#/tab/home/{{news.id}}">
       <img ng-src="{{news.thumbnail}}">
@@ -17,6 +16,9 @@
       <p>{{news.category}}</p>
     </ion-item>
   </ion-list>
+  <div ng-if="!hasMore" class="item item-divider item-icon-left dark">
+    <i class="icon ion-android-sad"></i>对不起,没有了!
+  </div>
   <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%">
   </ion-infinite-scroll>
 </ion-content>
