@@ -2,23 +2,43 @@
     "result": "OK",
     "data": [{
         "id": 1,
-        "icon": "img/icon1.png",
-        "label": "潞安水电暖",
-        "serviceUrl": "http://www.chianluan.com/service/sdn"
+        "icon": "http://res.imtt.qq.com/homepage/real/de4b1cb9a93c4d84a1eeb76936577e34.png",
+        "label": "天气",
+        "serviceUrl": "http://weather.html5.qq.com/index?ch=012001"
     }, {
         "id": 2,
-        "icon": "img/icon2.png",
-        "label": "潞安交通",
-        "serviceUrl": "http://www.chianluan.com/service/jt/",
+        "icon": "http://res.imtt.qq.com/homepage/real/0711eca7b2864c369c43ecd621823b95.png",
+        "label": "快递",
+        "serviceUrl": "http://m.kuaidi100.com/"
     }, {
         "id": 3,
-        "icon": "img/icon3.png",
-        "label": "酒店",
-        "serviceUrl": "http://www.chianluan.com/service/jd/"
+        "icon": "http://res.imtt.qq.com/homepage/real/833e6d16e5d34b8bbb9636a2e690d6f9.png",
+        "label": "地图",
+        "serviceUrl": "http://map.qq.com/m/index/map?ref=qqbrowserlife"
     }, {
         "id": 4,
-        "icon": "img/icon4.png",
+        "icon": "http://res.imtt.qq.com/homepage/real/ffff5213031a452c879c962cd4572409.png",
+        "label": "黄历",
+        "serviceUrl": "http://www.365rili.com/qq_brower_calendar/Calendar.html"
+    },{
+        "id": 5,
+        "icon": "http://res.imtt.qq.com/homepage/real/f4f635f4719b4d2e8952be16f993e388.png",
         "label": "公交",
-        "serviceUrl": "http://www.chianluan.com/service/gj"
+        "serviceUrl": "http://map.qq.com/m/index/nav/canclebutton=0&referer=qqbrowserBus"
+    }, {
+        "id": 6,
+        "icon": "http://res.imtt.qq.com/homepage/real/3195526e5efc4b91aa8dd45a1a40109c.png",
+        "label": "查违章",
+        "serviceUrl": "http://light.weiche.me/#&index"
+    }, {
+        "id": 7,
+        "icon": "http://res.imtt.qq.com/homepage/real/413c5f6f117d47b68db6da0614c0995d.png",
+        "label": "彩票",
+        "serviceUrl": "http://m.500.com/"
+    }, {
+        "id": 8,
+        "icon": "http://res.imtt.qq.com/homepage/real/1949db973cf4432a9f8507134d85bcef.png",
+        "label": "运势",
+        "serviceUrl": "http://infoapp.3g.qq.com/g/s?aid=astro&g_ut=3&g_f=23030#home"
     }]
 }

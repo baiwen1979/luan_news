@@ -1,5 +1,33 @@
 angular.module('app.services', ['ngResource'])
 
+.factory('Storage', function() {
+
+    var storeCache = {};
+
+    return {
+        getItems: function(storeName) {
+            if (storeCache[storeName]) {
+                return storeCache[storeName];
+            }
+            storeCache[storeName] = localStorage.getItem(storeName);
+            if (storeCache[storeName]) {
+                storeCache[storeName] = angular.fromJson(storeCache[storeName]);
+            }
+            else {
+                storeCache[storeName] = [];
+            }
+            return storeCache[storeName];
+        },
+
+        putItem: function(storeName, item) {
+            var items = this.getItems(storeName);
+            items.push(item);
+            localStorage.setItem(storeName, angular.toJson(items));
+        }
+        
+    };
+})
+
 .factory('Model', ['$resource', function($resource) {
 
     var resoureUrls = {
@@ -10,6 +38,9 @@ angular.module('app.services', ['ngResource'])
         article: {
             listAction: 'article_list',
             detailAction: 'article_detail'
+        },
+        service: {
+            listAction: 'services'
         }
     };
 

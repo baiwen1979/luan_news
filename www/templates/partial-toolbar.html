@@ -1,7 +1,7 @@
 <button class="button button-clear button-assertive icon ion-ios-arrow-left" ng-click="goBack()">
 </button>
-<button id="btn-say" class="button icon-left ion-compose" ng-click="comment(detail.id)">说点什么</button>
-<button id="btn-favor" class="button button-clear button-stable icon ion-ios-star-outline" ng-class="{'button-stable':!isCollected(detail.id),'button-assertive':isCollected(detail.id)}" ng-click="collect(detail.id,detail.title)">
+<button id="btn-say" class="button icon-left ion-compose" ng-click="comment(detail.id, $event)">说点什么</button>
+<button id="btn-favor" class="button button-clear button-stable icon ion-ios-star-outline" ng-class="{'button-stable':!isCollected(detail.id),'button-assertive':isCollected(detail.id)}" ng-click="collect(detail.id,detail.title)" ng-disabled="isCollected(detail.id)">
 </button>
 <button id="btn-share" class="button button-clear button-stable icon ion-share" ng-click="share(detail.id,detail.title)">
 </button>

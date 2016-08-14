@@ -371,3 +371,96 @@ h2.title {
     right: 10px;
     top: 15px;
 }
+
+#comment.popover {
+    width: 96%;
+    padding: 10px;
+    height: auto;
+}
+
+#comment textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+#comment button {
+    float: right;
+    width: 5em;
+}
+
+
+#tab-service li {
+    display: inline-block;
+    width: 48%;
+    border-bottom: 1px solid #EEE;
+}
+
+#tab-service li:nth-child(2n) {
+    border-left: 1px solid #EEE;
+}
+
+#tab-service li a {
+    display: block;
+    padding: 10px;
+    line-height: 48px;
+    text-decoration: none;
+    color: #666;
+    vertical-align: top;
+}
+
+#tab-service li a img {
+    float: left;
+    margin-right: 10px;
+}
+
+#tab-account {
+    background-color: #eee;
+}
+
+#tab-account .bar.bar-header {
+    height: 120px;
+}
+
+#tab-account .bar.bar-header .user-avatar {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+#tab-account .bar.bar-header img {
+    height: 80px;
+    width: 80px;
+    display: block;
+    margin: 5px auto;
+}
+
+#tab-account .bar.bar-subheader {
+    height: 80px;
+    top: 120px;
+}
+
+#tab-account .bar.bar-subheader .user-tool {
+    display: inline-block;
+    width:33%;
+    text-align: center;
+    font-size: 1.1em;
+    padding:10px 0;
+
+    border-left:1px solid #EEE;
+}
+
+#tab-account .bar.bar-subheader .user-tool:first-child {
+    border-left: none;
+}
+
+#tab-account .bar.bar-subheader .user-tool i{
+    font-size: 2em;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #387ef5;
+}
+
+#tab-account .has-header {
+    top: 210px;
+}
+

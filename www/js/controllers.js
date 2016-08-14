@@ -28,7 +28,7 @@ angular.module('app.controllers', [])
                 categories[i].vm = vm;
             }
             $scope.categories = categories;
-        }, function(err){
+        }, function(err) {
             $scope.error = err;
         });
     }
@@ -48,7 +48,7 @@ angular.module('app.controllers', [])
             $scope.categories[categoryIndex].vm.hasMore = false;
         });
     };
-    
+
     //refresh article list for current category
     $scope.doRefresh = function(categoryIndex) {
         $scope.categories[categoryIndex].vm.hasMore = true;
@@ -77,7 +77,7 @@ angular.module('app.controllers', [])
         if ($scope.categories[index].vm.items.length < 1) {
             $scope.categories[index].vm.hasMore = true;
             $scope.loadArticles(index);
-        }      
+        }
     };
 
     //enable or disable the outer slide box when touch or release the inner slide box
@@ -89,25 +89,37 @@ angular.module('app.controllers', [])
     $ionicSlideBoxDelegate.enableSlide(true);
 })
 
-.controller('DetailCtrl', function($scope, $stateParams, $ionicHistory, 
-    $ionicActionSheet, $ionicPopup, $timeout,
-    Model, Util) {
+.controller('DetailCtrl', function($scope, $stateParams, $ionicHistory,
+    $ionicActionSheet, $ionicPopup, $ionicPopover, $timeout,
+    Storage, Model, Util) {
 
     $scope.template = 'default';
     $scope.slideIndex = 0;
     $scope.showSubTitle = true;
     $scope.showFooterBar = true;
     $scope.fullSubTitle = false;
+    $scope.myComment = "";
+
+    function createPopover() {
+        var popover = $ionicPopover.fromTemplateUrl('templates/popover-comment.html', {
+            scope: $scope
+        });
+        popover.then(function(po) {
+            $scope.popover = po;
+            //$scope.initialize({focusFirstInput: true});
+        });
+    }
 
     $scope.$on('$ionicView.enter', function() {
-        Model.detail('article', {id: $stateParams.id}, function(detail) {
+        Model.detail('article', { id: $stateParams.id }, function(detail) {
             $scope.detail = detail;
-            Util.getDetailTemplate(detail.categoryId, function(template){
+            Util.getDetailTemplate(detail.categoryId, function(template) {
                 $scope.template = template;
             });
-        },function(err){
+        }, function(err) {
             $scope.error = err;
         });
+        createPopover();
     });
 
     $scope.onSlideClick = function() {
@@ -131,26 +143,44 @@ angular.module('app.controllers', [])
         $ionicHistory.goBack();
     };
 
+    $scope.closePopover = function() {
+        $scope.popover.hide();
+    };
+
+    $scope.commit = function(myComment) {
+        Storage.putItem('myComments', {
+            id: $scope.detail.id,
+            title: $scope.detail.title,
+            text: myComment
+        });
+
+        $scope.detail.comments.unshift({
+            user:'我[匿名]', 
+            portrait_url: 'img/user.png',
+            comment: myComment,
+            commentTime: (new Date()).getTime()
+        });
+
+        $scope.closePopover();
+
+    };
+
+    $scope.comment = function(id, event) {
+        $scope.popover.show(event);
+    };
+
     $scope.collect = function(id, title) {
-        var favorites = localStorage.getItem('favorites');
-        if (favorites) {
-            favorites = angular.fromJson(favorites);
-        }
-        else {
-            favorites = [];
-        }        
-        favorites.push({id: id, title: title});
-        localStorage.setItem('favorites', angular.toJson(favorites));
+        Storage.putItem('favorites', {
+            id: id,
+            title: title
+        });
     };
 
     $scope.isCollected = function(id) {
-        var favorites = localStorage.getItem('favorites');
-        if (favorites) {
-            favorites = angular.fromJson(favorites);
-            for (var i in favorites) {
-                if (favorites[i].id === id){
-                    return true;
-                }
+        var favorites = Storage.getItems('favorites');
+        for (var i in favorites) {
+            if (favorites[i].id === id) {
+                return true;
             }
         }
         return false;
@@ -165,12 +195,12 @@ angular.module('app.controllers', [])
             }, {
                 text: '发送给微信好友'
             }],
-            buttonClicked : function(index) {
+            buttonClicked: function(index) {
                 var popup = $ionicPopup.show({
                     title: '分享',
                     template: '测试版尚未提供分享功能'
                 });
-                $timeout(function(){
+                $timeout(function() {
                     popup.close();
                 }, 4000);
             }
@@ -178,7 +208,12 @@ angular.module('app.controllers', [])
     };
 })
 
-.controller('ServiceCtrl', function($scope) {})
+.controller('ServiceCtrl', function($scope, Model) {
+
+    Model.list('service', {}, function(items){
+        $scope.items = items;
+    });
+})
 
 .controller('AccountCtrl', function($scope) {
     $scope.settings = {

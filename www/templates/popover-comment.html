@@ -1,0 +1,8 @@
+<div id="comment" class="popover">
+  <p><textarea rows="8" ng-model="myComment" required=""></textarea></p>
+  <p>
+    {{myComment.length}}/1000
+    <button ng-disabled="myComment.length==0" class="button button-small button-assertive" ng-click="commit(myComment)">发表</button>
+    <button class="button button-small button-stable" ng-click="closePopover()">取消</button>
+  </p>
+</div>

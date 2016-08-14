@@ -1,9 +1,41 @@
 <ion-view id="tab-account" view-title="我的账户">
-  <ion-content>
+  <div class="bar bar-header bar-assertive">
+    <div class="user-avatar">
+      <img src="img/user.png" />
+      <p>登录 | 注册</p>
+    </div>
+  </div>
+  <div class="bar bar-subheader">
+    <div class="user-tool">
+      <i class="icon ion-ios-lightbulb"></i>
+      <p>夜间模式</p>
+    </div>
+    <div class="user-tool">
+      <i class="icon ion-ios-gear"></i>
+      <p>我的设置</p>
+    </div>
+    <div class="user-tool">
+      <i class="icon ion-clipboard"></i>
+      <p>意见反馈</p>
+    </div>
+  </div>
+  <ion-content class="has-header">
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
+      <ion-item class="item item-icon-left item-icon-right">
+        <i class="icon ion-chatboxes"></i>
+        我的评论
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+      <ion-item class="item item-icon-left item-icon-right">
+        <i class="icon ion-document-text"></i>
+        我的文章
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+      <ion-item class="item item-icon-left item-icon-right">
+        <i class="icon ion-ios-star"></i>
+        我的收藏
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
