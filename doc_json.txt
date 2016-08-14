@@ -11,50 +11,50 @@
             "name": "news",
             "label": "新闻",
             "desc": "新闻栏目",
-            "Class": "news",
-            "apiUrl": "data/news"
+            "listTemplate": "news",
+            "detailTemplate": "data/news"
         }, {
             "id": 2,
             "name": "paper",
             "label": "报纸",
             "desc": "报纸栏目",
-            "Class": "paper",
-            "apiUrl": "data/paper"
+            "listTemplate": "paper",
+            "detailTemplate": "data/paper"
         }, {
             "id": 3,
             "name": "video",
             "label": "视频",
             "desc": "视频栏目",
-            "Class": "video",
-            "apiUrl": "data/video"
+            "listTemplate": "video",
+            "detailTemplate": "data/video"
         }, {
             "id": 4,
             "name": "audio",
             "label": "音频",
             "desc": "音频栏目",
-            "Class": "audio",
-            "apiUrl": "data/audio"
+            "listTemplate": "audio",
+            "detailTemplate": "data/audio"
         }, {
             "id": 5,
             "name": "image",
             "label": "图片",
             "desc": "图片栏目",
-            "Class": "image",
-            "apiUrl": "data/image"
+            "listTemplate": "image",
+            "detailTemplate": "data/image"
         },{
             "id": 6,
             "name": "social",
             "label": "社会",
             "desc": "社会栏目",
-            "Class": "news",
-            "apiUrl": "data/social"
+            "listTemplate": "news",
+            "detailTemplate": "data/social"
         }, {
             "id": 7,
             "name": "changzhi",
             "label": "长治",
             "desc": "长治",
-            "Class": "news",
-            "apiUrl": "data/social"
+            "listTemplate": "news",
+            "detailTemplate": "data/social"
         }]
     }
     4. 部分属性说明:
@@ -63,8 +63,8 @@
        Class: 
 二、文章列表
    （一）客户端请求新闻类文章列表数据：
-    1. 请求：http://news.chinaluan.com/api/news.do?page=
-    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(文章数量)
+    1. 请求：http://news.chinaluan.com/api/list.do
+    2. 参数：c(分类id),p(页号,整数0,1,2,...)
     3. 响应(JSON):
        {
          'result': 'OK',
@@ -89,8 +89,8 @@
        hot: 文章热度
         
    （二）客户端请求报纸版面文章列表数据：
-    1. 请求：http://news.chinaluan.com/api/paper_articles.do?layout_id=1&pub_date=20160728
-    2. 参数：layout_id(版面id), pub_date(发行日期)
+    1. 请求：http://news.chinaluan.com/api/list.do
+    2. 参数：c(分类id),p(页号,整数0,1,2,...)
     3. 响应(JSON):
        {
          'result': 'OK',
@@ -120,8 +120,8 @@
                     [注]报纸类文章的发布需要后台有一个可视化界面，以便于发布者通过拖放和移动操作在报纸版面的底图上面指定文章所对应的报纸版块。
 
    （三）客户端请求视频文章列表数据：
-    1. 请求：http://news.chinaluan.com/api/video_articles.do?offset=0&count=3
-    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(加载数量)
+    1. 请求：http://news.chinaluan.com/api/list.do
+    2. 参数：c(分类id),p(页号,整数0,1,2,...)
     3. 响应(JSON)
        {
          'result': 'OK',
@@ -139,8 +139,8 @@
        duration：视频时长（秒数）
 
    （四）客户端请求音频文章列表数据：
-    1. 请求：http://news.chinaluan.com/api/audio_articles.do?offset=0&count=3
-    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(加载数量)
+    1. 请求：http://news.chinaluan.com/api/list.do
+    2. 参数：c(分类id),p(页号,整数0,1,2,...)
     3. 响应(JSON)
        {
          'result': 'OK',
@@ -157,8 +157,8 @@
        srcUrl：音频源的URL，若值为空，说明音频不会在列表中直接点击播放，需要用户点击进入内容页进行播放。否则，在文章标题右面显示播放图标，点击直接播放。
 
    （五）客户端请求图片类文章列表数据：
-    1. 请求：http://news.chinaluan.com/api/image_articles.do?offset=0&count=2
-    2. 参数：offset(偏移，为了实现基于瀑布流的动态加载), count(加载数量)
+    1. 请求：http://news.chinaluan.com/api/list.do
+    2. 参数：c(分类id),p(页号,整数0,1,2,...)
     3. 响应(JSON)
        {
          'result': 'OK',
@@ -179,8 +179,8 @@
 
 三、文章内容
    （一）客户端请求新闻类文章内容数据
-    1. 请求: http://news.chinaluan.com/api/news_article.do?id=1
-    2. 参数: id
+    1. 请求: http://news.chinaluan.com/api/detail.do
+    2. 参数: id(文章id)
     3. 响应(JSON)
        {
          'result': 'OK',
@@ -197,8 +197,8 @@
        comments: 评论列表，其中portrait_url为评论者的头像缩略图
 
    （二）客户端请求报纸版面文章内容数据
-    1. 请求：http://news.chinaluan.com/api/paper_article.do?id=1
-    2. 参数：id
+    1. 请求：http://news.chinaluan.com/api/detail.do
+    2. 参数：id(文章id)
     3. 响应(JSON)
         {
           'result': 'OK',
@@ -218,8 +218,8 @@
         }
 
    （三）客户端请求视频类文章内容数据
-    1. 请求：http://news.chinaluan.com/api/video_article.do?id=1
-    2. 参数：id
+    1. 请求：http://news.chinaluan.com/api/detail.do
+    2. 参数：id(文章id)
     3. 响应(JSON) 
        {
          'result': 'OK',
@@ -238,8 +238,8 @@
          }
        }
    （四）客户端请求音频类文章内容数据
-    1. 请求：http://news.chinaluan.com/api/audio_article.do?id=2
-    2. 参数：id
+    1. 请求：http://news.chinaluan.com/api/detail.do
+    2. 参数：id(文章id)
     3. 响应(JSON) 
        {
          'result': 'OK',
@@ -261,8 +261,8 @@
        }
 
    （五）客户端请求图片类文章内容数据
-    1. 请求：http://news.chinaluan.com/api/image_article.do?id=2
-    2. 参数：id
+    1. 请求：http://news.chinaluan.com/api/detail.do
+    2. 参数：id(文章id)
     3. 响应(JSON) 
        {
          'result': 'OK',
@@ -282,4 +282,47 @@
        }
     4. 部分属性说明：
        images: 文章包含的图片列表，显示为幻灯片，每一张图片都可以包含其描述信息。切换图片时，若该图片的描述信息不为空，则显示之，否则只显示第一张图片的描述信息
+
+四. 评论,登录和发文
+    (一) 发表评论
+    1. POST请求: http://news.chinaluan.com/api/addComment.do
+    2. 参数: aid(文章id), uid(用户id, 匿名用户为-1), content(评论内容)
+    3. 响应(JSON)
+       {
+           "result": "OK",
+           "data": "成功信息"
+       }
+       或
+       {
+           "result": "ERR",
+           "data": "失败信息"
+       }
+    (二) 用户登录
+    1. POST请求: http://news.chinaluan.com/api/login.do
+    2. 参数: username(用户名), password(密码)
+    3. 响应(JSON)
+       {
+           "result": "OK",
+           "data": "成功信息"
+       }
+       或
+       {
+           "result": "ERR",
+           "data": "失败信息"
+       }
+       
+    (三) 发表文章
+    1. POST请求: http://news.chinaluan.com/api/addArticle.do
+    2. 参数: uid(用户id), cid(栏目或分类id), title(文章标题), content(文章内容)
+    3. 响应(JSON)
+       {
+           "result": "OK",
+           "data": "成功信息"
+       }
+       或
+       {
+           "result": "ERR",
+           "data": "失败信息"
+       }   
+
 

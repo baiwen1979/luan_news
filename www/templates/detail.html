@@ -1,7 +1,6 @@
 <ion-view id="detail" hide-tabs="true" view-title="{{detail.title}}">
-  <ion-content class="padding">
-    <ng-include src="'templates/news.detail.html'"></ng-include>
-  </ion-content>
-  <ion-footer-bar align-title="left" class="bar-light" ng-include="'templates/partial-toolbar.html'" >
+  <ng-include ng-if="!error" src="'templates/' + template + '.detail.html'"></ng-include>
+  <ng-include ng-if="error" src="'templates/error.html'"></ng-include>
+  <ion-footer-bar class="animate" align-title="left" ng-class="{'bar-light':template!='image','bar-dark':template=='image','animate-hide':!showFooterBar}" ng-include="'templates/partial-toolbar.html'">
   </ion-footer-bar>
 </ion-view>

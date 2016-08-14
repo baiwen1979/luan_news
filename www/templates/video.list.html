@@ -1,21 +1,13 @@
-<ion-content id="news-list">
-  <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+<ion-content id="video-list" class="article-list">
+  <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh($index)">
   </ion-refresher>
-  <ion-slide-box delegate-handle="inner-slider" id="inner-slider" ng-mouseenter="enableOuterSlider(false)" ng-mouseleave="enableOuterSlider(true)" does-continue="true" auto-play="false">
-    <ion-slide ng-repeat="slide in slides">
-      <div class="box blue">
-        <a ng-href="#/tab/news/{{slide.id}}"><img ng-src="{{slide.large_image}}"></a>
-        <p class="title">{{slide.title}}</p>
-      </div>
-    </ion-slide>
-  </ion-slide-box>
   <ion-list>
-    <ion-item class="item item-thumbnail-left" ng-repeat="news in newsList" type="item-text-wrap" href="#/tab/news/{{news.id}}">
-      <img ng-src="{{news.thumbnail}}">
-      <h2>{{news.title}}</h2>
-      <p>{{news.category}}</p>
+    <ion-item class="item item-thumbnail-left" ng-repeat="item in category.vm.items" type="item-text-wrap" href="#/tab/detail/{{item.id}}">
+      <img ng-src="{{item.thumbnail}}">
+      <h2 class="title">{{item.title}}</h2>
+      <p class="time">{{item.publishTime | date: 'hh:mm:ss'}}</p>
+      <p class="comments"><i class="icon ion-ios-chatboxes-outline"></i>{{item.commentsCount}}</p>
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%">
-  </ion-infinite-scroll>
+  <ng-include src="'templates/partial-infinite.html'"></ng-include>
 </ion-content>

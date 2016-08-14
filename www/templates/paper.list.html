@@ -1,10 +1,12 @@
-<ion-content id="paper-list" class="paper" ng-controller="PaperCtrl">
+<ion-content id="paper-list" class="paper">
+  <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh($index)">
+  </ion-refresher>
   <ion-list>
-    <ion-item ng-repeat="page in pages" class="page">
-      <img ng-src="{{page.layoutImageUrl}}">
-      <a ng-repeat="article in page.ArticleList" ng-href="#/tab/home/{{article.id}}" title="{{article.title}}" style="top:{{article.layoutPosition.top}}px; left:{{article.layoutPosition.left}}px; width:{{article.layoutPosition.width}}px; height:{{article.layoutPosition.height}}px;">
+    <ion-item ng-repeat="item in category.vm.items" class="page" >
+      <img ng-src="{{item.layoutImageUrl}}">
+      <a on-touch="touched=true" on-release="touched=false" ng-class="{active: touched}" ng-repeat="article in item.ArticleList" ng-href="#/tab/detail/{{article.id}}" title="{{article.title}}" style="top:{{article.layoutPosition.top}}px; left:{{article.layoutPosition.left}}px; width:{{article.layoutPosition.width}}px; height:{{article.layoutPosition.height}}px;">
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="5%">
+  <ion-infinite-scroll ng-if="category.vm.hasMore" on-infinite="loadArticles($index)" distance="20%">
   </ion-infinite-scroll>
 </ion-content>

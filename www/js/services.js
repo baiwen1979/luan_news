@@ -3,20 +3,26 @@ angular.module('app.services', ['ngResource'])
 .factory('Model', ['$resource', function($resource) {
 
     var resoureUrls = {
+        apiBaseUrl: 'data',
         category: {
-            listUrl: 'data/categories'
+            listAction: 'categories'
         },
         article: {
-            listUrl: 'data/article_list',
-            detailUrl: 'data/article_detail'
+            listAction: 'article_list',
+            detailAction: 'article_detail'
         }
+    };
+
+    var paramConfig = {
+        reqChar: '',
+        operator: '',
+        separator: '',
+        suffix: '.json'
     };
 
     function loadResource(url, onOK, onErr) {
         if (typeof(onErr) != 'function') {
-            onErr = function(err) {
-                console.log(err);
-            };
+            onErr = function(err) {};
         }
         $resource(url).get(function(res) {
             if (res.result == 'OK') {
@@ -24,13 +30,15 @@ angular.module('app.services', ['ngResource'])
             } else {
                 onErr(res.data);
             }
-        }, onErr);
+        }, function(err){
+            onErr(err.data);
+        });
     }
 
     function paramsToQueryStr(params) {
-        var qs = "";
-        for(var p in params) {
-            qs += p + params[p];
+        var qs = paramConfig.reqChar;
+        for (var p in params) {
+            qs += p + paramConfig.operator + params[p] + paramConfig.separator;
         }
         return qs;
     }
@@ -38,11 +46,49 @@ angular.module('app.services', ['ngResource'])
     return {
         list: function(clazz, params, onOK, onErr) {
             var qs = paramsToQueryStr(params);
-            loadResource(resoureUrls[clazz].listUrl + qs + '.json', onOK, onErr);
+            var listUrl = resoureUrls.apiBaseUrl + '/' + resoureUrls[clazz].listAction;
+            loadResource(listUrl + qs + paramConfig.suffix, onOK, onErr);
         },
 
-        detail: function(clazz, id, onOK, onErr) {
-            loadResource(resoureUrls[clazz].detailUrl + id + '.json', onOK, onErr);
+        detail: function(clazz, params, onOK, onErr) {
+            var qs = paramsToQueryStr(params);
+            var detailUrl = resoureUrls.apiBaseUrl + '/' + resoureUrls[clazz].detailAction;
+            loadResource(detailUrl + qs + paramConfig.suffix, onOK, onErr);
         }
     };
-}]);
+}])
+
+.factory('Util', function(Model) {
+
+    var categories;
+    var templates;
+
+    return {
+        getCategories: function(onLoad, onErr) {
+            if (categories) {
+                onLoad(categories);
+            } else {
+                Model.list('category', {}, function(list) {
+                    categories = list;
+                    onLoad(categories);
+                }, onErr);
+            }
+        },
+        getDetailTemplate: function(categoryId, callback) {
+            if (templates) {
+                callback(templates[categoryId]);
+            } 
+            else {
+                this.getCategories(function(list) {
+                    templates = {};
+                    for (var i in list) {
+                        templates[list[i].id] = list[i].detailTemplate;
+                    }
+                    callback(templates[categoryId]);
+                }, function() {
+                    callback('default');
+                });
+            }
+        }
+    };
+});

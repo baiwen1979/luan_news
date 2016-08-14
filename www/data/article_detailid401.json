@@ -1,0 +1,19 @@
+{
+    "result": "OK",
+    "data": {
+        "id": 401,
+        "title": "工信部：仍有1亿电话用户未实名",
+        "abstract": "文章摘要",
+        "categoryId": 4,
+        "content": "文章文本内容",
+        "source": "潞安新闻中心",
+        "author": "宋青和",
+        "publishTime": 1469710798,
+        "srcUrl": "media/sample.mp3",
+        "duration": 245,
+        "comments": [
+            { "user": "张三", "portrait_url": "http://news.chinaluan.com/portraits/user1.jpg", "comment": "评论内容", "commentTime": 1469710444 },
+            { "user": "李四", "portrait_url": "http://news.chinaluan.com/portraits/user2.jpg", "comment": "评论内容", "commentTime": 1469710555 }
+        ]
+    }
+}

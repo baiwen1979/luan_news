@@ -1,10 +1,13 @@
-<div id="news-detail" class="news-header">
-  <h1>{{title}}</h1>
-  <p>
-    <span>{{publishTime| date:'yyyy-MM-dd hh:mm'}}</span>
-    <span>{{source}}</span>
-    <span>{{author}}</span>
-  </p>
-</div>
-<div ng-bind-html="content">
+<ion-content scroll="false" id="image-detail" class="{'has-footer':showFooterBar}">
+  <ion-slide-box show-pager="false" active-slide="slideIndex" on-slide-changed="slideChanged(index)" ng-click="onSlideClick()">
+    <ion-slide class="dark"  ng-repeat="image in detail.images">
+      <img ng-src="{{image.imageUrl}}"/>
+    </ion-slide>
+  </ion-slide-box>
+</ion-content>
+<div class="sub-title animate" ng-class="{'animate-hide':!showSubTitle, 'full-sub-title':fullSubTitle}" on-swipe-up="swipeUp()" on-swipe-down="swipeDown()">
+    <h3><i>{{slideIndex + 1}}</i>/{{detail.images.length}}&nbsp;{{detail.title}}</h3>
+    <div class="desc" ng-repeat="image in detail.images" ng-show="$index==slideIndex">
+     {{image.desc}}
+    </div>
 </div>

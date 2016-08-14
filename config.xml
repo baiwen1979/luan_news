@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.chinaluan.news" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>luan_news</name>
+  <name>潞安新闻</name>
   <description>
         潞安新闻中心客户端APP.
   </description>

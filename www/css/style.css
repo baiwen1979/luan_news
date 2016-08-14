@@ -2,13 +2,39 @@
     border-color: transparent;
 }
 
-#news-list .item img:first-child {
+.item-thumbnail-left img {
     min-width: 100px;
     height: auto;
 }
+.banner a {
+    padding: 0 0 10px 0 !important;
+    height: auto;
+}
+.banner img {
+    width: 100%;
+    position: static !important;
+    height: 240px !important;
+    max-width: none !important;
+    max-height: none !important;
+}
 
-#news-list .item a {
+.banner .title {
+    float: left;
+    margin-left: 10px;
+}
+
+.duration {
+    float: right;
+    margin-right: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.article-list .item a {
     padding-left: 120px;
+    padding-right: 10px;
 }
 
 .news-header {
@@ -168,10 +194,11 @@
     position: relative;
     width:378px;
     height: 597px;
+    margin: 0 auto;
 }
 
 #paper-list.paper .page img {
-    min-width: 100%;
+    max-width: 100%;
     padding: 0;
     margin: 0;
 }
@@ -181,6 +208,166 @@
     display: block;
 }
 
-#paper-list.paper .page a:hover {
-    background-color: rgba(0,0,0,0.5);
+#paper-list.paper .page a:hover,
+#paper-list.paper .page a.active {
+    background-color: rgba(0,0,0,0.4);
+}
+
+.time, .comments, .duration{
+    position: absolute;
+    bottom: 15px;
+}
+
+.comments, .duration {
+    right: 15px;
+}
+
+.comments i, .duration i {
+    margin-right: 5px;
+}
+
+h2.title {
+    margin-top: 5px;
+    overflow: visible;
+    white-space: normal;
+}
+
+.loading {
+   width: 100%;
+   text-align: center;
+   display: block;
+   position: fixed;
+   margin-top: 50%;
+}
+
+#detail {
+    background-color: #F6F6F6;
+}
+
+.error h1 {
+    color: darkred;
+    font-size: 1.5em;
+    border-bottom: 1px solid red;
+}
+
+.error ul {
+    list-style: disc;
+    padding-left: 2em;
+}
+
+#audio-list img.audio {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+}
+
+#audio-list a, #audio-list ion-item {
+    min-height: 85px;
+}
+
+#audio-list .item-thumbnail-left a {
+    padding-left: 80px;
+    padding-right: 15px;
+}
+
+#audio-list .item-thumbnail-right a {
+    padding-right: 80px;
+    padding-left: 15px;
+}
+
+#audio-player {
+    position: fixed;
+}
+
+#audio-player audio {
+    width: 100%;
+}
+
+#video-player video {
+    background-color: #666;
+    width: 100%;
+}
+
+#image-list .card a {
+    padding: 0;
+}
+
+#image-list .card {
+    margin:5px 10px;
+    text-align: left;
+}
+
+#image-list .card img {
+    height: 220px;
+}
+
+#image-list .card h2 {
+    margin: 10px;
+}
+
+#image-list .card p {
+    float: right;
+    font-size: 1em;
+    margin:10px;
+}
+
+#image-detail img {
+    margin-top: 45%;
+    width: 100%;
+}
+
+#image-detail {
+    background-color: #000;
+}
+
+#image-detail + .sub-title {
+    background-color: rgba(0,0,0, 0.6);
+    color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 44px;
+    min-height: 30%; 
+    height:30%;   
+    padding:10px;
+}
+
+#image-detail + .sub-title h3 {
+    color: white;
+    font-size: 1.1em;
+}
+
+#image-detail + .sub-title i {
+    color: red;
+}
+
+#image-detail + .sub-title .desc {
+    text-indent: 2em;
+}
+
+.animate {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+}
+
+.animate-hide , .full-sub-title.animate-hide {
+    height: 0 !important;
+    border: 0 !important;
+    bottom: -10px !important;
+    overflow: hidden;
+    min-height: 0 !important;
+    top: initial !important;
+}
+
+.full-sub-title {
+    height: auto !important;
+}
+
+#comments {
+    margin-top: 20px;
+}
+
+#comments .time {
+    right: 10px;
+    top: 15px;
 }

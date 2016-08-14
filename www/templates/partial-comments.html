@@ -1,0 +1,11 @@
+<div id="comments">
+  <ion-list>
+    <ion-item class="item item-divider">热门评论</ion-item>
+    <ion-item class="item item-avatar" ng-repeat="item in detail.comments"> 
+      <img ng-src="{{item.portrait_url}}">
+      <h2>{{item.user}}</h2>
+      <p>{{item.comment}}</p>
+      <p class="time">{{item.commentTime | date:'yyyy-MM-dd hh:mm'}}</p>
+    </ion-item>
+  </ion-list>
+</div>

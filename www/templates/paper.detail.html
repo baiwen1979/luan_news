@@ -1,10 +1,13 @@
-<div id="news-detail" class="news-header">
-  <h1>{{title}}</h1>
-  <p>
-    <span>{{publishTime| date:'yyyy-MM-dd hh:mm'}}</span>
-    <span>{{source}}</span>
-    <span>{{author}}</span>
-  </p>
-</div>
-<div ng-bind-html="content">
-</div>
+<ion-content id="paper-detail" class="padding has-footer">
+  <div id="news-detail" class="news-header">
+    <h1>{{title}}</h1>
+    <p>
+      <span>{{publishTime| date:'yyyy-MM-dd hh:mm'}}</span>
+      <span>{{source}}</span>
+      <span>{{author}}</span>
+    </p>
+  </div>
+  <div ng-bind-html="content">
+  </div>
+  <ng-include src="'templates/partial-comments.html'" ></ng-include>
+</ion-content>

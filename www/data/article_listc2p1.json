@@ -1,6 +1,65 @@
 {
     "result": "OK",
-    "data": {
+    "data": [{
+        "layoutImageUrl": "img/paper_page_01.jpg",
+        "layoutTitle": "要闻",
+        "ArticleList": [{
+            "id": 201,
+            "title": "省委召开常委会议",
+            "category": "paper",
+            "layoutPosition": { "left": 8, "top": 119, "width": 238, "height": 167 }
+        }, {
+            "id": 202,
+            "title": "我省职称评定有新变化",
+            "category": "paper",
+            "layoutPosition": {
+                "left": 256,
+                "top": 218,
+                "width": 117,
+                "height": 119
+            }
+        }, {
+            "id": 203,
+            "title": "运城市新绛县古交镇龙泉村田间一派繁忙景象",
+            "category": "paper",
+            "layoutPosition": {
+                "left": 256,
+                "top": 118,
+                "width": 115,
+                "height": 88
+            }
+        }, {
+            "id": 204,
+            "title": "最美兵哥哥”牛何松获殊",
+            "category": "paper",
+            "layoutPosition": {
+                "left": 252,
+                "top": 361,
+                "width": 105,
+                "height": 18
+            }
+        }, {
+            "id": 205,
+            "title": "中国首金",
+            "category": "paper",
+            "layoutPosition": {
+                "left": 8,
+                "top": 290,
+                "width": 228,
+                "height": 95
+            }
+        }, {
+            "id": 206,
+            "title": "全力以赴做好下半年经济工作",
+            "category": "paper",
+            "layoutPosition": {
+                "left": 11,
+                "top": 401,
+                "width": 359,
+                "height": 166
+            }
+        }]
+    }, {
         "layoutImageUrl": "img/paper_page_02.jpg",
         "layoutTitle": "要闻",
         "ArticleList": [{
@@ -134,5 +193,5 @@
                 "height": 89
             }
         }]
-    }
+    }]
 }

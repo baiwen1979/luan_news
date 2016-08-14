@@ -18,7 +18,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $stateProvider
     // setup an abstract state for the tabs directive
-        .state('tab', {
+    .state('tab', {
         url: '/tab',
         abstract: true,
         templateUrl: 'templates/tabs.html'
@@ -36,7 +36,7 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
     })
 
     .state('tab.detail', {
-        url: '/home/:id',
+        url: '/detail/:id',
         views: {
             'tab-home': {
                 templateUrl: 'templates/detail.html',
@@ -65,7 +65,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
         }
     });
 
-    // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
 
     $ionicConfigProvider.platform.android.tabs.position('bottom');

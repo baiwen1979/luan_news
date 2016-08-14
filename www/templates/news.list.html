@@ -1,24 +1,21 @@
-<ion-content id="news-list" class="news" ng-controller="NewsCtrl">
-  <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()">
+<ion-content id="news-list" class="article-list">
+  <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh($index)">
   </ion-refresher>
-  <ion-slide-box ng-mouseenter="enableOuterSlider(false)" on-touch="enableOuterSlider(false)" on-release="enableOuterSlider(true)" delegate-handle="inner-slider" id="inner-slider" does-continue="true" auto-play="false">
-    <ion-slide ng-repeat="slide in slides">
+  <ion-slide-box on-touch="enableOuterSlider(false)" on-release="enableOuterSlider(true)" delegate-handle="inner-slider" id="inner-slider" does-continue="true" auto-play="false">
+    <ion-slide ng-repeat="item in category.vm.items | limitTo: 5" ng-if="item.large_image">
       <div class="box blue">
-        <a ng-href="#/tab/home/{{slide.id}}"><img ng-src="{{slide.large_image}}"></a>
-        <p class="title">{{slide.title}}</p>
+        <a ng-href="#/tab/detail/{{item.id}}"><img ng-src="{{item.large_image}}"></a>
+        <p class="title">{{item.title}}</p>
       </div>
     </ion-slide>
   </ion-slide-box>
   <ion-list>
-    <ion-item class="item item-thumbnail-left" ng-repeat="news in list" type="item-text-wrap" href="#/tab/home/{{news.id}}">
-      <img ng-src="{{news.thumbnail}}">
-      <h2>{{news.title}}</h2>
-      <p>{{news.category}}</p>
+    <ion-item class="item item-thumbnail-left" ng-repeat="item in category.vm.items" ng-if="!item.large_image" type="item-text-wrap" href="#/tab/detail/{{item.id}}">
+      <img class="thumbnail" ng-src="{{item.thumbnail}}">
+      <h2 class="title">{{item.title}}</h2>
+      <p class="time">{{item.publishTime | date:'yyyy-MM-dd hh:mm'}}</p>
+      <p class="comments"><i class="icon ion-ios-chatboxes-outline"></i>{{item.commentsCount}}</p>
     </ion-item>
   </ion-list>
-  <div ng-if="!hasMore" class="item item-divider item-icon-left dark">
-    <i class="icon ion-android-sad"></i>对不起,没有了!
-  </div>
-  <ion-infinite-scroll ng-if="hasMore" on-infinite="loadMore()" distance="1%">
-  </ion-infinite-scroll>
+  <ng-include src="'templates/partial-infinite.html'"></ng-include>
 </ion-content>

@@ -1,0 +1,24 @@
+{
+    "result": "OK",
+    "data": [{
+        "id": 1,
+        "icon": "img/icon1.png",
+        "label": "潞安水电暖",
+        "serviceUrl": "http://www.chianluan.com/service/sdn"
+    }, {
+        "id": 2,
+        "icon": "img/icon2.png",
+        "label": "潞安交通",
+        "serviceUrl": "http://www.chianluan.com/service/jt/",
+    }, {
+        "id": 3,
+        "icon": "img/icon3.png",
+        "label": "酒店",
+        "serviceUrl": "http://www.chianluan.com/service/jd/"
+    }, {
+        "id": 4,
+        "icon": "img/icon4.png",
+        "label": "公交",
+        "serviceUrl": "http://www.chianluan.com/service/gj"
+    }]
+}

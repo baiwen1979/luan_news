@@ -14,7 +14,7 @@
   </ion-header-bar>
   <ion-slide-box delegate-handle="outer-slider" id="outer-slider" show-pager="false" on-slide-changed="outerSlideChanged(index)" active-slide="slideIndex">
     <ion-slide ng-repeat="category in categories"> 
-      <ng-include src="category.listTemplateUrl"></ng-include>
+      <ng-include src="'templates/' + category.listTemplate + '.list.html'"></ng-include>
     </ion-slide>
   </ion-slide-box>
 </ion-view>
