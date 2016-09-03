@@ -12,55 +12,54 @@
             "label": "新闻",
             "desc": "新闻栏目",
             "listTemplate": "news",
-            "detailTemplate": "data/news"
+            "detailTemplate": "news"
         }, {
             "id": 2,
             "name": "paper",
             "label": "报纸",
             "desc": "报纸栏目",
             "listTemplate": "paper",
-            "detailTemplate": "data/paper"
+            "detailTemplate": "paper"
         }, {
             "id": 3,
             "name": "video",
             "label": "视频",
             "desc": "视频栏目",
             "listTemplate": "video",
-            "detailTemplate": "data/video"
+            "detailTemplate": "video"
         }, {
             "id": 4,
             "name": "audio",
             "label": "音频",
             "desc": "音频栏目",
             "listTemplate": "audio",
-            "detailTemplate": "data/audio"
+            "detailTemplate": "audio"
         }, {
             "id": 5,
             "name": "image",
             "label": "图片",
             "desc": "图片栏目",
             "listTemplate": "image",
-            "detailTemplate": "data/image"
+            "detailTemplate": "image"
         },{
             "id": 6,
             "name": "social",
             "label": "社会",
             "desc": "社会栏目",
             "listTemplate": "news",
-            "detailTemplate": "data/social"
+            "detailTemplate": "news"
         }, {
             "id": 7,
             "name": "changzhi",
             "label": "长治",
             "desc": "长治",
             "listTemplate": "news",
-            "detailTemplate": "data/social"
+            "detailTemplate": "news"
         }]
     }
     4. 部分属性说明:
        result: 响应结果，若后台出现异常，将result的值设置为'ERR'
        data: 响应数据，若后台出现异常，在将异常信息保存在此属性中
-       Class: 
 二、文章列表
    （一）客户端请求新闻类文章列表数据：
     1. 请求：http://news.chinaluan.com/api/list.do
@@ -283,19 +282,24 @@
     4. 部分属性说明：
        images: 文章包含的图片列表，显示为幻灯片，每一张图片都可以包含其描述信息。切换图片时，若该图片的描述信息不为空，则显示之，否则只显示第一张图片的描述信息
 
-四. 评论,登录和发文
+四. 评论,登录,上传文件和发表文章
     (一) 发表评论
     1. POST请求: http://news.chinaluan.com/api/addComment.do
     2. 参数: aid(文章id), uid(用户id, 匿名用户为-1), content(评论内容)
     3. 响应(JSON)
        {
            "result": "OK",
-           "data": "成功信息"
+           "data": {
+               "message": "评论成功",
+               "commentId": 1
+           }
        }
        或
        {
            "result": "ERR",
-           "data": "失败信息"
+           "data": {
+               "message": "评论失败:此文禁止评论"
+           }
        }
     (二) 用户登录
     1. POST请求: http://news.chinaluan.com/api/login.do
@@ -303,26 +307,55 @@
     3. 响应(JSON)
        {
            "result": "OK",
-           "data": "成功信息"
+           "data": {
+               "message": "登录成功",
+               "sessionId": "12345678",
+               "userId": 1,
+               "avatar": "http://news.chinaluan.com/img/avatar01.jpg"
+           }
        }
        或
        {
            "result": "ERR",
-           "data": "失败信息"
+           "data": {
+               "message": "登录失败:用户名或密码不正确"
+           }
        }
-       
-    (三) 发表文章
+    (三) 上传文件(视频和图片)
+    1. POST请求: http://news.chinaluan.com/api/upload.do
+    2. 参数: file(文件)
+    3. 响应(JSON)
+       {
+           "result": "OK",
+           "data": {
+               "message": "上传成功",
+               "fileUrl": "http://news.chinaluan.com/upload/201608291114.jpg"
+           }
+       }
+       或
+       {
+           "result": "ERR",
+           "data": {
+               "message": "上传失败:文件大小不能超过2MB/只能上传视频和图片"
+           }
+       }     
+    (四) 发表文章
     1. POST请求: http://news.chinaluan.com/api/addArticle.do
     2. 参数: uid(用户id), cid(栏目或分类id), title(文章标题), content(文章内容)
     3. 响应(JSON)
        {
            "result": "OK",
-           "data": "成功信息"
+           "data": {
+               "message": "文章发布成功,请等待审核",
+               "articleId": 1
+           }
        }
        或
        {
            "result": "ERR",
-           "data": "失败信息"
+           "data": {
+              "message": "文章发布失败"
+           }
        }   
 
 

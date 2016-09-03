@@ -1,0 +1,240 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', '-g', 'ionic' ]
+2 info using npm@2.15.8
+3 info using node@v4.4.7
+4 verbose install initial load of /usr/lib/package.json
+5 verbose readDependencies loading dependencies from /usr/lib/package.json
+6 silly cache add args [ 'ionic', null ]
+7 verbose cache add spec ionic
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'ionic',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'ionic',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: 'latest',
+8 silly cache add   type: 'tag' }
+9 silly addNamed ionic@latest
+10 verbose addNamed "latest" is being treated as a dist-tag for ionic
+11 info addNameTag [ 'ionic', 'latest' ]
+12 silly mapToRegistry name ionic
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npm.taobao.org/
+15 silly mapToRegistry data Result {
+15 silly mapToRegistry   raw: 'ionic',
+15 silly mapToRegistry   scope: null,
+15 silly mapToRegistry   name: 'ionic',
+15 silly mapToRegistry   rawSpec: '',
+15 silly mapToRegistry   spec: 'latest',
+15 silly mapToRegistry   type: 'tag' }
+16 silly mapToRegistry uri https://registry.npm.taobao.org/ionic
+17 verbose addNameTag registry:https://registry.npm.taobao.org/ionic not in flight; fetching
+18 verbose request uri https://registry.npm.taobao.org/ionic
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 00:13:35
+21 verbose request id 8ebd65c63dbff3aa
+22 verbose etag "c76e7-21eO52HGXIozz8lGAbXSiw"
+23 http request GET https://registry.npm.taobao.org/ionic
+24 http 200 https://registry.npm.taobao.org/ionic
+25 verbose headers { date: 'Fri, 26 Aug 2016 16:13:37 GMT',
+25 verbose headers   'content-type': 'application/json; charset=utf-8',
+25 verbose headers   'content-length': '836031',
+25 verbose headers   connection: 'keep-alive',
+25 verbose headers   'x-current-requests': '1',
+25 verbose headers   etag: '"cc1bf-qMqbjUeFjwHL1fIut1BHYg"',
+25 verbose headers   'x-readtime': '889' }
+26 silly get cb [ 200,
+26 silly get   { date: 'Fri, 26 Aug 2016 16:13:37 GMT',
+26 silly get     'content-type': 'application/json; charset=utf-8',
+26 silly get     'content-length': '836031',
+26 silly get     connection: 'keep-alive',
+26 silly get     'x-current-requests': '1',
+26 silly get     etag: '"cc1bf-qMqbjUeFjwHL1fIut1BHYg"',
+26 silly get     'x-readtime': '889' } ]
+27 verbose get saving ionic to /home/xiaobai/.npm/registry.npm.taobao.org/ionic/.cache.json
+28 verbose correctMkdir /home/xiaobai/.npm correctMkdir not in flight; initializing
+29 silly addNameTag next cb for ionic with tag latest
+30 silly addNamed ionic@2.0.0
+31 verbose addNamed "2.0.0" is a plain semver version for ionic
+32 silly mapToRegistry name ionic
+33 silly mapToRegistry using default registry
+34 silly mapToRegistry registry https://registry.npm.taobao.org/
+35 silly mapToRegistry data Result {
+35 silly mapToRegistry   raw: 'ionic',
+35 silly mapToRegistry   scope: null,
+35 silly mapToRegistry   name: 'ionic',
+35 silly mapToRegistry   rawSpec: '',
+35 silly mapToRegistry   spec: 'latest',
+35 silly mapToRegistry   type: 'tag' }
+36 silly mapToRegistry uri https://registry.npm.taobao.org/ionic
+37 verbose addRemoteTarball https://registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz not in flight; adding
+38 verbose addRemoteTarball [ 'https://registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz',
+38 verbose addRemoteTarball   '8135804e1f2470292100dedadc571e99023e4f7c' ]
+39 info retry fetch attempt 1 at 00:13:38
+40 info attempt registry request try #1 at 00:13:38
+41 http fetch GET https://registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz
+42 http fetch 200 https://registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz
+43 silly fetchAndShaCheck shasum 8135804e1f2470292100dedadc571e99023e4f7c
+44 verbose addTmpTarball /tmp/npm-8171-8c174111/registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz not in flight; adding
+45 verbose addTmpTarball already have metadata; skipping unpack for ionic@2.0.0
+46 verbose correctMkdir /home/xiaobai/.npm correctMkdir not in flight; initializing
+47 silly cache afterAdd ionic@2.0.0
+48 verbose afterAdd /home/xiaobai/.npm/ionic/2.0.0/package/package.json not in flight; writing
+49 verbose correctMkdir /home/xiaobai/.npm correctMkdir not in flight; initializing
+50 verbose afterAdd /home/xiaobai/.npm/ionic/2.0.0/package/package.json written
+51 silly install resolved [ { name: 'ionic',
+51 silly install resolved     version: '2.0.0',
+51 silly install resolved     preferGlobal: true,
+51 silly install resolved     description: 'A tool for creating and developing Ionic Framework mobile apps.',
+51 silly install resolved     homepage: 'http://ionicframework.com/',
+51 silly install resolved     bin: { ionic: 'bin/ionic' },
+51 silly install resolved     scripts:
+51 silly install resolved      { changelog: 'conventional-changelog -i CHANGELOG.md -s -p angular',
+51 silly install resolved        'gh-release': 'node scripts/release',
+51 silly install resolved        coveralls: 'istanbul cover node_modules/jasmine-node/bin/jasmine-node --captureExceptions spec/ && cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js && rm -rf coverage',
+51 silly install resolved        e2e: 'jasmine-node --captureExceptions ./e2e',
+51 silly install resolved        jasmine: 'jasmine-node --captureExceptions  ./spec',
+51 silly install resolved        lint: 'eslint .',
+51 silly install resolved        test: 'istanbul cover node_modules/jasmine-node/bin/jasmine-node --captureExceptions spec/' },
+51 silly install resolved     keywords:
+51 silly install resolved      [ 'ionic',
+51 silly install resolved        'ionic framework',
+51 silly install resolved        'ionicframework',
+51 silly install resolved        'mobile',
+51 silly install resolved        'app',
+51 silly install resolved        'hybrid',
+51 silly install resolved        'cordova',
+51 silly install resolved        'native',
+51 silly install resolved        'phonegap' ],
+51 silly install resolved     repository:
+51 silly install resolved      { type: 'git',
+51 silly install resolved        url: 'git+https://github.com/driftyco/ionic-cli.git' },
+51 silly install resolved     contributors: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+51 silly install resolved     license: 'MIT',
+51 silly install resolved     dependencies:
+51 silly install resolved      { 'cli-table': '0.3.1',
+51 silly install resolved        colors: '0.6.2',
+51 silly install resolved        'expand-tilde': '1.2.0',
+51 silly install resolved        'form-data': '0.1.4',
+51 silly install resolved        gulp: '3.8.8',
+51 silly install resolved        'gulp-util': '3.0.7',
+51 silly install resolved        inquirer: '0.11.2',
+51 silly install resolved        'ionic-app-lib': '2.0.0',
+51 silly install resolved        moment: '2.11.1',
+51 silly install resolved        open: '0.0.5',
+51 silly install resolved        optimist: '0.6.0',
+51 silly install resolved        'pretty-hrtime': '1.0.2',
+51 silly install resolved        progress: '1.1.7',
+51 silly install resolved        prompt: '0.2.12',
+51 silly install resolved        q: '1.0.1',
+51 silly install resolved        request: '2.51.0',
+51 silly install resolved        semver: '4.3.6',
+51 silly install resolved        'serve-static': '1.7.1',
+51 silly install resolved        shelljs: '0.2.6',
+51 silly install resolved        underscore: '1.7.0',
+51 silly install resolved        unzip: '0.1.9' },
+51 silly install resolved     devDependencies:
+51 silly install resolved      { 'conventional-changelog-cli': '1.1.1',
+51 silly install resolved        coveralls: '^2.2.0',
+51 silly install resolved        eslint: '^3.0.1',
+51 silly install resolved        github: '0.2.4',
+51 silly install resolved        istanbul: '^0.4.4',
+51 silly install resolved        'jasmine-node': '1.14.5',
+51 silly install resolved        'mock-require': '1.3.0',
+51 silly install resolved        rewire: '2.5.1' },
+51 silly install resolved     gitHead: '9185bb5828b2ecd85edd4dbce9ab165a6288641e',
+51 silly install resolved     bugs: { url: 'https://github.com/driftyco/ionic-cli/issues' },
+51 silly install resolved     bundleDependencies:
+51 silly install resolved      [ 'cli-table',
+51 silly install resolved        'colors',
+51 silly install resolved        'expand-tilde',
+51 silly install resolved        'form-data',
+51 silly install resolved        'gulp',
+51 silly install resolved        'gulp-util',
+51 silly install resolved        'inquirer',
+51 silly install resolved        'ionic-app-lib',
+51 silly install resolved        'moment',
+51 silly install resolved        'open',
+51 silly install resolved        'optimist',
+51 silly install resolved        'pretty-hrtime',
+51 silly install resolved        'progress',
+51 silly install resolved        'prompt',
+51 silly install resolved        'q',
+51 silly install resolved        'request',
+51 silly install resolved        'semver',
+51 silly install resolved        'serve-static',
+51 silly install resolved        'shelljs',
+51 silly install resolved        'underscore',
+51 silly install resolved        'unzip' ],
+51 silly install resolved     _id: 'ionic@2.0.0',
+51 silly install resolved     _shasum: '8135804e1f2470292100dedadc571e99023e4f7c',
+51 silly install resolved     _from: 'ionic@latest',
+51 silly install resolved     _npmVersion: '2.15.0',
+51 silly install resolved     _nodeVersion: '4.4.2',
+51 silly install resolved     _npmUser: { name: 'jthoms1', email: 'jthoms1@gmail.com' },
+51 silly install resolved     dist:
+51 silly install resolved      { shasum: '8135804e1f2470292100dedadc571e99023e4f7c',
+51 silly install resolved        size: 25010559,
+51 silly install resolved        noattachment: false,
+51 silly install resolved        tarball: 'http://registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz' },
+51 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object], [Object] ],
+51 silly install resolved     _npmOperationalInternal:
+51 silly install resolved      { host: 'packages-12-west.internal.npmjs.com',
+51 silly install resolved        tmp: 'tmp/ionic-2.0.0.tgz_1471268623406_0.1434044949710369' },
+51 silly install resolved     directories: {},
+51 silly install resolved     publish_time: 1471268631447,
+51 silly install resolved     _cnpm_publish_time: 1471268631447,
+51 silly install resolved     _resolved: 'https://registry.npm.taobao.org/ionic/download/ionic-2.0.0.tgz' } ]
+52 info install ionic@2.0.0 into /usr/lib
+53 info installOne ionic@2.0.0
+54 verbose installOne of ionic to /usr/lib not in flight; installing
+55 verbose correctMkdir /home/xiaobai/.npm/_locks correctMkdir not in flight; initializing
+56 verbose lock using /home/xiaobai/.npm/_locks/ionic-870c91ec4eeb12ef.lock for /usr/lib/node_modules/ionic
+57 silly install write writing ionic 2.0.0 to /usr/lib/node_modules/ionic
+58 verbose unbuild lib/node_modules/ionic
+59 info preuninstall ionic@1.7.16
+60 info uninstall ionic@1.7.16
+61 verbose unbuild rmStuff ionic@1.7.16 from /usr/lib/node_modules
+62 silly gentlyRm /usr/bin/ionic is being gently removed
+63 silly gentlyRm verifying /usr is an npm working directory
+64 silly gentlyRm containing path /usr is under npm's control, in /usr
+65 silly gentlyRm deletion target /usr/bin/ionic is under /usr
+66 verbose gentlyRm vacuuming from /usr/bin/ionic up to /usr
+67 silly vacuum-fs removing /usr/bin/ionic
+68 verbose unlock done using /home/xiaobai/.npm/_locks/ionic-870c91ec4eeb12ef.lock for /usr/lib/node_modules/ionic
+69 verbose stack Error: EACCES: permission denied, unlink '/usr/bin/ionic'
+69 verbose stack     at Error (native)
+70 verbose cwd /home/xiaobai/webdev/luan_news
+71 error Linux 3.16.0-4-amd64
+72 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "-g" "ionic"
+73 error node v4.4.7
+74 error npm  v2.15.8
+75 error path /usr/bin/ionic
+76 error code EACCES
+77 error errno -13
+78 error syscall unlink
+79 error Error: EACCES: permission denied, unlink '/usr/bin/ionic'
+79 error     at Error (native)
+79 error  { [Error: EACCES: permission denied, unlink '/usr/bin/ionic']
+79 error   errno: -13,
+79 error   code: 'EACCES',
+79 error   syscall: 'unlink',
+79 error   path: '/usr/bin/ionic' }
+80 error Please try running this command again as root/Administrator.
+81 verbose exit [ -13, true ]
+82 verbose unbuild lib/node_modules/ionic
+83 info preuninstall ionic@1.7.16
+84 info uninstall ionic@1.7.16
+85 verbose unbuild rmStuff ionic@1.7.16 from /usr/lib/node_modules
+86 silly gentlyRm /usr/bin/ionic is being gently removed
+87 silly gentlyRm verifying /usr is an npm working directory
+88 silly gentlyRm containing path /usr is under npm's control, in /usr
+89 silly gentlyRm deletion target /usr/bin/ionic is under /usr
+90 verbose gentlyRm vacuuming from /usr/bin/ionic up to /usr
+91 silly vacuum-fs removing /usr/bin/ionic
+92 error error rolling back Error: EACCES: permission denied, unlink '/usr/bin/ionic'
+92 error error rolling back     at Error (native)
+92 error error rolling back  { [Error: EACCES: permission denied, unlink '/usr/bin/ionic']
+92 error error rolling back   errno: -13,
+92 error error rolling back   code: 'EACCES',
+92 error error rolling back   syscall: 'unlink',
+92 error error rolling back   path: '/usr/bin/ionic' }

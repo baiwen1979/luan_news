@@ -75,7 +75,8 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
         // Allow same origin resource loads.
         'self',
         // Allow loading from our assets domain.  Notice the difference between * and **.
-        'http://www.chinaluan.com/**'
+        'http://www.chinaluan.com/**',
+        'http://60.220.238.2:8080/**'
     ]);
 
     // The blacklist overrides the whitelist so the open redirect here is blocked.

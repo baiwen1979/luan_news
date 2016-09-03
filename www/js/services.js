@@ -30,6 +30,7 @@ angular.module('app.services', ['ngResource'])
 
 .factory('Model', ['$resource', function($resource) {
 
+    
     var resoureUrls = {
         apiBaseUrl: 'data',
         category: {
@@ -44,13 +45,38 @@ angular.module('app.services', ['ngResource'])
         }
     };
 
+    
     var paramConfig = {
         reqChar: '',
         operator: '',
         separator: '',
         suffix: '.json'
     };
+    
+   
+    /*
+    var resoureUrls = {
+        apiBaseUrl: 'http://60.220.238.2:8080/media/api',
+        category: {
+            listAction: 'categories.do'
+        },
+        article: {
+            listAction: 'newsJsonList.do',
+            detailAction: 'newsJsonDetailView.do'
+        },
+        service: {
+            listAction: 'services.do'
+        }
+    };
 
+    var paramConfig = {
+        reqChar: '?',
+        operator: '=',
+        separator: '&',
+        suffix: ''
+    };
+
+    */
     function loadResource(url, onOK, onErr) {
         if (typeof(onErr) != 'function') {
             onErr = function(err) {};
