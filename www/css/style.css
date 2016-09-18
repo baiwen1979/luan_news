@@ -128,6 +128,10 @@
     padding: 0;
 }
 
+.platform-ios #tab-home .bar {
+    height: 52px;
+}
+
 #tab-home .bar-header {
     border-bottom: none;
 }
@@ -154,6 +158,7 @@
     margin: 0;
     width: auto;
     white-space: nowrap;
+    height: 32px;
 }
 
 .slide-tabs li {
@@ -189,10 +194,14 @@
     right: 0;
 }
 
+.platform-ios #outer-slider {
+    top: 52px;
+}
+
 #paper-list.paper .page {
     padding: 0;
     position: relative;
-    width:378px;
+    width: 378px;
     height: 597px;
     margin: 0 auto;
 }
@@ -242,6 +251,10 @@ h2.title {
 
 #detail {
     background-color: #F6F6F6;
+}
+
+.platform-ios .ios-top-20 {
+    top: 20px;
 }
 
 .error h1 {
@@ -389,17 +402,17 @@ h2.title {
 }
 
 
-#tab-service li {
+#tab-services li {
     display: inline-block;
     width: 48%;
     border-bottom: 1px solid #EEE;
 }
 
-#tab-service li:nth-child(2n) {
+#tab-services li:nth-child(2n) {
     border-left: 1px solid #EEE;
 }
 
-#tab-service li a {
+#tab-services li a {
     display: block;
     padding: 10px;
     line-height: 48px;
@@ -408,7 +421,7 @@ h2.title {
     vertical-align: top;
 }
 
-#tab-service li a img {
+#tab-services li a img {
     float: left;
     margin-right: 10px;
 }
@@ -419,6 +432,11 @@ h2.title {
 
 #tab-account .bar.bar-header {
     height: 120px;
+}
+
+.platform-ios #tab-account .bar.bar-header {
+    padding-top: 20px;
+    height: 140px;
 }
 
 #tab-account .bar.bar-header .user-avatar {
@@ -437,6 +455,10 @@ h2.title {
 #tab-account .bar.bar-subheader {
     height: 80px;
     top: 120px;
+}
+
+.platform-ios #tab-account .bar.bar-subheader {
+    top: 140px;
 }
 
 #tab-account .bar.bar-subheader .user-tool {
@@ -464,3 +486,11 @@ h2.title {
     top: 210px;
 }
 
+.platform-ios #tab-account .has-header {
+    top: 230px;
+}
+
+iframe.full {
+    width: 100%;
+    min-height: 100%;
+}

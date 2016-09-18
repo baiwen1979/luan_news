@@ -90,7 +90,7 @@ angular.module('app.controllers', [])
 })
 
 .controller('DetailCtrl', function($scope, $stateParams, $ionicHistory,
-    $ionicActionSheet, $ionicPopup, $ionicPopover, $timeout,
+    $ionicActionSheet, $ionicPopup, $ionicPopover, $timeout, $sce,
     Storage, Model, Util) {
 
     $scope.template = 'default';
@@ -112,6 +112,7 @@ angular.module('app.controllers', [])
 
     $scope.$on('$ionicView.enter', function() {
         Model.detail('article', { id: $stateParams.id }, function(detail) {
+            //detail.content = $sce.trustAsHtml(detail.content);
             $scope.detail = detail;
             Util.getDetailTemplate(detail.categoryId, function(template) {
                 $scope.template = template;
@@ -208,14 +209,36 @@ angular.module('app.controllers', [])
     };
 })
 
-.controller('ServiceCtrl', function($scope, Model) {
+.controller('ServicesCtrl', function($scope, _, Util) {
 
-    Model.list('service', {}, function(items){
-        $scope.items = items;
+    Util.getServices(function(items) {
+
+        $scope.groups = _.groupBy(items, function(item){
+            return item.serviceType.name;
+        });
+        console.log($scope.groups);
     });
 })
 
+.controller('ServiceCtrl', function($scope, $sce, $stateParams, Util) {
+    Util.getServices(function(services) {
+        for (var i = 0; i < services.length; i++) {
+            if (services[i].id == $stateParams.id) {
+                $scope.service = services[i];
+                //console.log($scope.service.label);
+                $scope.serviceUrl = $sce.trustAsResourceUrl($scope.service.serviceUrl);
+                break;
+            }
+        }
+    });    
+})
+
+.controller('LoginCtrl', function($scope, $stateParams) {
+    //$scope.userId = $stateParams.userId;
+})
+
 .controller('AccountCtrl', function($scope) {
+    //$scope.userId = 0;
     $scope.settings = {
         enableFriends: true
     };

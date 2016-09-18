@@ -1,0 +1,22 @@
+<ion-view id="tab-services" view-title="服务">
+  <ion-nav-bar class="bar-assertive">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="list" ng-repeat="(group, items) in groups">
+      <div class="item item-divider">
+        {{group}}
+      </div>
+      <div>
+        <ul>
+          <li ng-repeat="item in items">
+            <a ng-href="#/tab/service/{{item.id}}">
+              <img ng-src="{{item.icon}}" /> {{item.label}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

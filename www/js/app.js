@@ -1,4 +1,4 @@
-angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directives'])
+angular.module('app', ['ionic', 'underscore', 'app.controllers', 'app.services', 'app.directives'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -45,10 +45,20 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
         }
     })
 
-    .state('tab.service', {
-        url: '/service',
+    .state('tab.services', {
+        url: '/services',
         views: {
-            'tab-service': {
+            'tab-services': {
+                templateUrl: 'templates/tab-services.html',
+                controller: 'ServicesCtrl'
+            }
+        }
+    })
+
+    .state('tab.service',{
+        url: '/service/:id',
+        views : {
+            'tab-services' : {
                 templateUrl: 'templates/tab-service.html',
                 controller: 'ServiceCtrl'
             }
@@ -63,19 +73,31 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'app.directiv
                 controller: 'AccountCtrl'
             }
         }
+    })
+
+    .state('tab.login', {
+        url: '/login',
+        views: {
+            'tab-account': {
+                templateUrl: 'templates/tab-login.html',
+                controller: 'LoginCtrl'
+            }
+        }
     });
 
     $urlRouterProvider.otherwise('/tab/home');
 
     $ionicConfigProvider.platform.android.tabs.position('bottom');
+    $ionicConfigProvider.platform.android.tabs.style('standard');
+    $ionicConfigProvider.backButton.previousTitleText(false);
+    $ionicConfigProvider.backButton.text('');
 })
 
 .config(function($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
         'self',
-        // Allow loading from our assets domain.  Notice the difference between * and **.
-        'http://www.chinaluan.com/**',
+        // Allow loading from our assets domain.
         'http://60.220.238.2:8080/**'
     ]);
 

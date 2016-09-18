@@ -29,32 +29,7 @@ angular.module('app.services', ['ngResource'])
 })
 
 .factory('Model', ['$resource', function($resource) {
-
     
-    var resoureUrls = {
-        apiBaseUrl: 'data',
-        category: {
-            listAction: 'categories'
-        },
-        article: {
-            listAction: 'article_list',
-            detailAction: 'article_detail'
-        },
-        service: {
-            listAction: 'services'
-        }
-    };
-
-    
-    var paramConfig = {
-        reqChar: '',
-        operator: '',
-        separator: '',
-        suffix: '.json'
-    };
-    
-   
-    /*
     var resoureUrls = {
         apiBaseUrl: 'http://60.220.238.2:8080/media/api',
         category: {
@@ -75,9 +50,9 @@ angular.module('app.services', ['ngResource'])
         separator: '&',
         suffix: ''
     };
-
-    */
-    function loadResource(url, onOK, onErr) {
+    
+    
+    function getData(url, onOK, onErr) {
         if (typeof(onErr) != 'function') {
             onErr = function(err) {};
         }
@@ -104,13 +79,13 @@ angular.module('app.services', ['ngResource'])
         list: function(clazz, params, onOK, onErr) {
             var qs = paramsToQueryStr(params);
             var listUrl = resoureUrls.apiBaseUrl + '/' + resoureUrls[clazz].listAction;
-            loadResource(listUrl + qs + paramConfig.suffix, onOK, onErr);
+            getData(listUrl + qs + paramConfig.suffix, onOK, onErr);
         },
 
         detail: function(clazz, params, onOK, onErr) {
             var qs = paramsToQueryStr(params);
             var detailUrl = resoureUrls.apiBaseUrl + '/' + resoureUrls[clazz].detailAction;
-            loadResource(detailUrl + qs + paramConfig.suffix, onOK, onErr);
+            getData(detailUrl + qs + paramConfig.suffix, onOK, onErr);
         }
     };
 }])
@@ -119,6 +94,7 @@ angular.module('app.services', ['ngResource'])
 
     var categories;
     var templates;
+    var services;
 
     return {
         getCategories: function(onLoad, onErr) {
@@ -145,6 +121,17 @@ angular.module('app.services', ['ngResource'])
                 }, function() {
                     callback('default');
                 });
+            }
+        },
+        getServices : function(onLoad, onErr) {
+            if (services) {
+                onLoad(services);
+            }
+            else {
+                Model.list('service', {}, function(list) {
+                    services = list;
+                    onLoad(services);
+                }, onErr);
             }
         }
     };

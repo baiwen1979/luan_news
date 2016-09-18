@@ -1,7 +1,7 @@
 {
   "name": "luan_news",
   "version": "1.1.1",
-  "description": "luan_news: An Ionic project",
+  "description": "潞安新闻客户端",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
@@ -22,7 +22,5 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": [
-    "android"
-  ]
+  "cordovaPlatforms": []
 }

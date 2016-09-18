@@ -1,0 +1,11 @@
+{
+  "name": "潞安新闻",
+  "short_name": "Luan News",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}

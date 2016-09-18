@@ -1,21 +1,9 @@
-<ion-view id="tab-service" view-title="便民服务">
- <ion-nav-bar class="bar-assertive">
- </ion-nav-bar>
-  <ion-content>
-    <div class="list">
-      <div class="item item-divider">
-       生活服务
-      </div>
-      <div>
-        <ul>
-          <li ng-repeat="item in items">
-            <a ng-href="{{item.serviceUrl}}">
-              <img ng-src="{{item.icon}}"/>
-              {{item.label}}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </ion-content>
+<ion-view id="tab-service" view-title="{{service.label}}">
+    <ion-nav-bar class="bar-assertive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content scroll="true" overflow-scroll="true">
+        <iframe ng-src="{{serviceUrl}}" class="full"></iframe>
+    </ion-content>
 </ion-view>
